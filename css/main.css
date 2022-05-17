@@ -1779,6 +1779,7 @@ pre .javascript .function {
   color: inherit;
   font-weight: 600;
   font-size: 16px;
+  color: #fff;
 }
 .site-state-item-name {
   font-size: 13px;
@@ -1824,7 +1825,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #f1eda3;
+  background: #b55d25;
 }
 .links-of-blogroll {
   font-size: 13px;

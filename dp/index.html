@@ -79,15 +79,15 @@
 
 
 
-<meta name="description" content="待更新1console.log(&quot;Hello World!&quot;)">
+<meta name="description" content="LeetCode467.环绕字符串中唯一子字符串链接：https:&#x2F;&#x2F;leetcode.cn&#x2F;problems&#x2F;unique-substrings-in-wraparound-string&#x2F; 若用蛮力解法，时间复杂度至少为O(n^2)，即对输入字符串的起点和终点都遍历一遍，还需要检查子串是否已被统计过。采用动态规划的思想，用一个长度为26的数组记录以每个英文单词结尾的子串的最大长度，最后返回数组和">
 <meta property="og:type" content="website">
 <meta property="og:title" content="动态规划&#x2F;贪心算法">
 <meta property="og:url" content="http://example.com/dp/index.html">
 <meta property="og:site_name" content="red kk">
-<meta property="og:description" content="待更新1console.log(&quot;Hello World!&quot;)">
+<meta property="og:description" content="LeetCode467.环绕字符串中唯一子字符串链接：https:&#x2F;&#x2F;leetcode.cn&#x2F;problems&#x2F;unique-substrings-in-wraparound-string&#x2F; 若用蛮力解法，时间复杂度至少为O(n^2)，即对输入字符串的起点和终点都遍历一遍，还需要检查子串是否已被统计过。采用动态规划的思想，用一个长度为26的数组记录以每个英文单词结尾的子串的最大长度，最后返回数组和">
 <meta property="og:locale">
 <meta property="article:published_time" content="2022-05-17T12:48:09.000Z">
-<meta property="article:modified_time" content="2022-05-19T13:14:14.926Z">
+<meta property="article:modified_time" content="2022-05-26T12:41:10.463Z">
 <meta property="article:author" content="林轶航">
 <meta name="twitter:card" content="summary">
 
@@ -257,7 +257,9 @@
       <div class="post-body">
         
         
-          <h3 id="待更新"><a href="#待更新" class="headerlink" title="待更新"></a>待更新</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.log(<span class="string">&quot;Hello World!&quot;</span>)</span><br></pre></td></tr></table></figure>
+          <h3 id="LeetCode467-环绕字符串中唯一子字符串"><a href="#LeetCode467-环绕字符串中唯一子字符串" class="headerlink" title="LeetCode467.环绕字符串中唯一子字符串"></a>LeetCode467.环绕字符串中唯一子字符串</h3><p>链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/unique-substrings-in-wraparound-string/">https://leetcode.cn/problems/unique-substrings-in-wraparound-string/</a></p>
+<p>若用蛮力解法，时间复杂度至少为O(n^2)，即对输入字符串的起点和终点都遍历一遍，还需要检查子串是否已被统计过。<br>采用动态规划的思想，用一个长度为26的数组记录以每个英文单词结尾的子串的最大长度，最后返回数组和，时间复杂度O(n)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">var neighbor = (s1, s2) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span>((s2.charCodeAt() - s1.charCodeAt() == 1) || (s1 == <span class="string">&#x27;z&#x27;</span> &amp;&amp; s2 == <span class="string">&#x27;a&#x27;</span>))&#123;</span><br><span class="line">        <span class="built_in">return</span> <span class="literal">true</span></span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var findSubstringInWraproundString = <span class="keyword">function</span>(p) &#123;</span><br><span class="line">    <span class="keyword">if</span>(p.length == 1) <span class="built_in">return</span> 1</span><br><span class="line">    const dp = new Array(26).fill(0)</span><br><span class="line">    dp[p[0].charCodeAt() - 97] = 1</span><br><span class="line">    count = 1</span><br><span class="line">    <span class="keyword">for</span>(<span class="built_in">let</span> i = 1; i &lt; p.length; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(neighbor(p[i - 1], p[i]))&#123;</span><br><span class="line">            count++</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            count = 1</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(count &gt; dp[p[i].charCodeAt() - 97]) dp[p[i].charCodeAt() - 97] = count</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">sum</span> = 0</span><br><span class="line">    <span class="keyword">for</span>(<span class="built_in">let</span> i = 0; i &lt; 26; i++)&#123;</span><br><span class="line">        <span class="built_in">sum</span> += dp[i]</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> <span class="built_in">sum</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
         
       </div>
       
@@ -363,7 +365,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%85%E6%9B%B4%E6%96%B0"><span class="nav-number">1.</span> <span class="nav-text">待更新</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#LeetCode467-%E7%8E%AF%E7%BB%95%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E5%94%AF%E4%B8%80%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.</span> <span class="nav-text">LeetCode467.环绕字符串中唯一子字符串</span></a></li></ol></div>
             
 
           </div>

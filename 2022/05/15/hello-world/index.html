@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="BFS核心数据结构为队列，基本操作为元素出队列，将其基础上的“趋向目标”元素入队列，循环重复直至满足条件或队列空。 例1：哈密顿圈问题 在多面体或平面图中，从一个顶点开始沿着棱（边）走遍所有其他顶点回到原地，且每一顶点只通过一次。这样的路径就是一条哈密顿回路。求证正十二面体存在哈密顿回路。 解：易知正十二面体的每个面是正五边形，绘制其平面展开图，对每个节点标号，并用邻接表的形式存储图，进">
+<meta property="og:type" content="article">
+<meta property="og:title" content="高复杂度蛮力算法">
+<meta property="og:url" content="http://example.com/2022/05/15/hello-world/index.html">
+<meta property="og:site_name" content="red kk">
+<meta property="og:description" content="BFS核心数据结构为队列，基本操作为元素出队列，将其基础上的“趋向目标”元素入队列，循环重复直至满足条件或队列空。 例1：哈密顿圈问题 在多面体或平面图中，从一个顶点开始沿着棱（边）走遍所有其他顶点回到原地，且每一顶点只通过一次。这样的路径就是一条哈密顿回路。求证正十二面体存在哈密顿回路。 解：易知正十二面体的每个面是正五边形，绘制其平面展开图，对每个节点标号，并用邻接表的形式存储图，进">
+<meta property="og:locale">
+<meta property="og:image" content="http://example.com/uploads/hmt.png">
+<meta property="article:published_time" content="2022-05-15T15:18:13.553Z">
+<meta property="article:modified_time" content="2024-01-19T02:36:19.336Z">
+<meta property="article:author" content="林轶航">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/uploads/hmt.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2022/05/15/hello-world/"/>
+
+
+
+
+
+  <title>高复杂度蛮力算法 | red kk</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">red kk</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">往者不可谏，来者犹可追。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            高复杂度蛮力算法
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-分治/减治思想">
+          <a href="/division/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            分治/减治思想
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-动态规划/贪心算法">
+          <a href="/dp/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            动态规划/贪心算法
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-脑筋急转弯">
+          <a href="/brain_teaser/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            脑筋急转弯
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-音乐和生活">
+          <a href="/music_and_life/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            音乐和生活
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/15/hello-world/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="red kk">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">高复杂度蛮力算法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-15T23:18:13+08:00">
+                2022-05-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <!-- Welcome to [Hexo](https://hexo.io/)! This is your very first post. Check [documentation](https://hexo.io/docs/) for more info. If you get any problems when using Hexo, you can find the answer in [troubleshooting](https://hexo.io/docs/troubleshooting.html) or you can ask me on [GitHub](https://github.com/hexojs/hexo/issues). -->
+<!-- -->
+
+<!-- ## Quick Start -->
+
+<h3 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h3><p>核心数据结构为<strong>队列</strong>，基本操作为元素出队列，将其基础上的“趋向目标”元素入队列，循环重复直至满足条件或队列空。</p>
+<p><strong>例1：哈密顿圈问题</strong></p>
+<p>在多面体或平面图中，从一个顶点开始沿着棱（边）走遍所有其他顶点回到原地，且每一顶点只通过一次。这样的路径就是一条哈密顿回路。求证正十二面体存在哈密顿回路。</p>
+<p><strong>解：</strong>易知正十二面体的每个面是正五边形，绘制其平面展开图，对每个节点标号，并用邻接表的形式存储图，进行广度优先搜索，若路径的当前节点不是“死节点”（相邻节点都已在路径中），则将新路径入队列。</p>
+<p><img src="/./uploads/hmt.png" alt="哈密顿回路"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">const graph = &#123;</span><br><span class="line">    1:[2,5,20],</span><br><span class="line">    2:[1,3,12],</span><br><span class="line">    3:[2,4,10],</span><br><span class="line">    4:[3,5,8],</span><br><span class="line">    5:[1,4,6],</span><br><span class="line">    6:[5,7,19],</span><br><span class="line">    7:[6,8,17],</span><br><span class="line">    8:[4,7,9],</span><br><span class="line">    9:[8,10,16],</span><br><span class="line">    10:[3,9,11],</span><br><span class="line">    11:[10,12,15],</span><br><span class="line">    12:[2,11,13],</span><br><span class="line">    13:[12,14,20],</span><br><span class="line">    14:[13,15,18],</span><br><span class="line">    15:[11,14,16],</span><br><span class="line">    16:[9,15,17],</span><br><span class="line">    17:[7,16,18],</span><br><span class="line">    18:[14,17,19],</span><br><span class="line">    19:[6,18,20],</span><br><span class="line">    20:[1,13,19]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const queue = [[1]]; // 由于其对称性，只需考虑以节点1为起点的路径</span><br><span class="line"></span><br><span class="line">var checkHamiltonianCircuit = <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">    <span class="keyword">while</span>(queue.length)&#123;</span><br><span class="line">        const sz = queue.length;</span><br><span class="line">        <span class="keyword">for</span>(<span class="built_in">let</span> i = 0; i &lt; sz; i++)&#123;</span><br><span class="line">            const way = queue.shift();</span><br><span class="line">            <span class="keyword">if</span>(way.length == 20 &amp;&amp; graph[way[way.length - 1]].includes(way[0]))&#123;</span><br><span class="line">                console.log(way)</span><br><span class="line">                <span class="built_in">return</span> <span class="literal">true</span></span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="built_in">let</span> j = 0; j &lt; 3; j++)&#123;</span><br><span class="line">                    <span class="keyword">if</span>(!way.includes(graph[way[way.length - 1]][j]))&#123;</span><br><span class="line">                        const newWay = [...way, graph[way[way.length - 1]][j]]  // 用扩展运算符实现数组的深拷贝</span><br><span class="line">                        queue.push(newWay)</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>例2：二叉树左小角的值</strong><br>LeetCode513，链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-bottom-left-tree-value/">https://leetcode.cn/problems/find-bottom-left-tree-value/</a></p>
+<p>找出二叉树最底层最左边节点的值。</p>
+<p><strong>解：</strong>用first变量记录每一层最左边的节点，若遍历完最后一层，队列变空，退出循环。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">var findBottomLeftValue = <span class="keyword">function</span>(root) &#123;</span><br><span class="line">    const queue = [root]</span><br><span class="line">    var first;</span><br><span class="line">    <span class="keyword">while</span>(queue.length)&#123;</span><br><span class="line">        first = queue.shift()</span><br><span class="line">        const curLength = queue.length</span><br><span class="line">        <span class="keyword">if</span>(first.left)&#123;</span><br><span class="line">            queue.push(first.left)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(first.right)&#123;</span><br><span class="line">            queue.push(first.right)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="built_in">let</span> i = 0; i &lt; curLength; i++)&#123;</span><br><span class="line">            <span class="built_in">let</span> curNode = queue.shift()</span><br><span class="line">            <span class="keyword">if</span>(curNode.left)&#123;</span><br><span class="line">                queue.push(curNode.left)</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(curNode.right)&#123;</span><br><span class="line">                queue.push(curNode.right)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> first.val</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>例3：最小基因变化</strong><br>LeetCode433，链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-genetic-mutation">https://leetcode.cn/problems/minimum-genetic-mutation</a></p>
+<p>基因序列可以表示为一条由 8 个字符组成的字符串，其中每个字符都是 ‘A’、’C’、’G’ 和 ‘T’ 之一。<br>假设我们需要调查从基因序列 start 变为 end 所发生的基因变化。一次基因变化就意味着这个基因序列中的一个字符发生了变化。<br>例如，”AACCGGTT” –&gt; “AACCGGTA” 就是一次基因变化。<br>另有一个基因库 bank 记录了所有有效的基因变化，只有基因库中的基因才是有效的基因序列。<br>给你两个基因序列 start 和 end ，以及一个基因库 bank ，请你找出并返回能够使 start 变化为 end 所需的最少变化次数。如果无法完成此基因变化，返回 -1 。<br>注意：起始基因序列 start 默认是有效的，但是它并不一定会出现在基因库中。</p>
+<p>输入：start &#x3D; “AACCGGTT”, end &#x3D; “AAACGGTA”, bank &#x3D; [“AACCGGTA”,”AACCGCTA”,”AAACGGTA”]<br>输出：2</p>
+<p><strong>解法1：</strong>初始队列为[start]，对于队列中的每个基因序列探寻其“最小变化”是否合法（在bank中且不在visited中）或等于end，将合法者入队列，等于end则return step，将检验元素出队列；一轮结束后step++，重复以上过程，若最后队列空则return -1。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> minMutation(start, end, bank)&#123;</span><br><span class="line">    const series = [<span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;C&#x27;</span>,<span class="string">&#x27;T&#x27;</span>,<span class="string">&#x27;G&#x27;</span>];</span><br><span class="line">    const visited = [start]</span><br><span class="line">    const queue = [start]</span><br><span class="line">    <span class="built_in">let</span> step = 1</span><br><span class="line">    <span class="keyword">if</span>(start == end)&#123;</span><br><span class="line">        <span class="built_in">return</span> 0;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(!bank.includes(end))&#123;</span><br><span class="line">        <span class="built_in">return</span> -1;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(queue.length)&#123;</span><br><span class="line">        const currentLength = queue.length;</span><br><span class="line">        <span class="keyword">for</span>(<span class="built_in">let</span> index = 0; index &lt; currentLength; index++)&#123;</span><br><span class="line">            const shiftGenetic = queue.shift();</span><br><span class="line">            <span class="keyword">for</span>(<span class="built_in">let</span> i = 0; i &lt; 8; i++)&#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="built_in">let</span> k = 0; k &lt; 4; k++)&#123;</span><br><span class="line">                    const x = series[k]</span><br><span class="line">                    <span class="keyword">if</span>(shiftGenetic[i] != x)&#123;</span><br><span class="line">                        // 字符串和数组的转化，用于修改字符串中某个元素</span><br><span class="line">                        const strList = shiftGenetic.<span class="built_in">split</span>(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">                        strList[i] = x;</span><br><span class="line">                        const newStr = strList.<span class="built_in">join</span>(<span class="string">&#x27;&#x27;</span>);</span><br><span class="line">                        <span class="keyword">if</span>(newStr == end)&#123;</span><br><span class="line">                            <span class="built_in">return</span> step;</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="keyword">if</span>(bank.includes(newStr) &amp;&amp; !visited.includes(newStr))&#123;</span><br><span class="line">                            visited.push(newStr)</span><br><span class="line">                            queue.push(newStr)</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        step ++</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> -1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>tips：</strong>js中不要在forEach循环中return函数结果，因为forEach中的return不会终止循环</p>
+<p><strong>解法2：</strong>在解法1的基础上做预处理优化，用邻接表存储bank中各个基因序列的两两相邻状况；初始队列为与start相邻且在bank中的基因序列，然后对其进行类似解法1的操作，优化点在于不需要对队列中的每个基因序列的每个元素依次做替换，只需到邻接表中读取相应数据即可。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">const minMutation = (start, end, bank)=&gt;&#123;</span><br><span class="line">    const n = bank.length;</span><br><span class="line">    const adj = new Array(n).fill(0).map(() =&gt; new Array())</span><br><span class="line">    <span class="built_in">let</span> endIndex = -1</span><br><span class="line">    <span class="keyword">if</span>(!bank.includes(end))&#123;</span><br><span class="line">        <span class="built_in">return</span> -1</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(start == end)&#123;</span><br><span class="line">        <span class="built_in">return</span> 0</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="built_in">let</span> i = 0; i &lt; n; i++)&#123;</span><br><span class="line">        const ele1 = bank[i]</span><br><span class="line">        <span class="keyword">if</span>(ele1 === end)&#123;</span><br><span class="line">            endIndex = i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="built_in">let</span> j = i + 1; j &lt; n; j++)&#123;</span><br><span class="line">            <span class="built_in">let</span> mutation = 0</span><br><span class="line">            <span class="keyword">for</span>(<span class="built_in">let</span> k = 0; k &lt; 8; k++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(mutation &gt; 1)&#123;</span><br><span class="line">                    <span class="built_in">break</span></span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(bank[i][k] != bank[j][k])&#123;</span><br><span class="line">                    mutation++</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(mutation == 1)&#123;</span><br><span class="line">                adj[i].push(j)</span><br><span class="line">                adj[j].push(i)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">let</span> step = 1</span><br><span class="line">    const queue = []</span><br><span class="line">    const visited = []</span><br><span class="line">    <span class="keyword">for</span>(<span class="built_in">let</span> i = 0; i &lt; n; i++)&#123;</span><br><span class="line">        <span class="built_in">let</span> mutation = 0</span><br><span class="line">        <span class="keyword">for</span>(<span class="built_in">let</span> j = 0; j &lt; 8; j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(mutation &gt; 1)&#123;</span><br><span class="line">                <span class="built_in">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(start[j] != bank[i][j])&#123;</span><br><span class="line">                mutation++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(mutation == 1)&#123;</span><br><span class="line">            queue.push(i)</span><br><span class="line">            visited.push(i)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(queue.length)&#123;</span><br><span class="line">        const currLength = queue.length;</span><br><span class="line">        <span class="keyword">for</span>(<span class="built_in">let</span> i = 0; i &lt; currLength; i++)&#123;</span><br><span class="line">            const curr = queue.shift();</span><br><span class="line">            <span class="keyword">if</span>(curr == endIndex)&#123;</span><br><span class="line">                <span class="built_in">return</span> step;</span><br><span class="line">            &#125;</span><br><span class="line">            adj[curr].forEach(x =&gt; &#123;</span><br><span class="line">                <span class="keyword">if</span>(!visited.includes(x))&#123;</span><br><span class="line">                    queue.push(x);</span><br><span class="line">                    visited.push(x);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">        step++</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> -1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h3><p>沿着一条路一直走，若遇到“死节点”则一步步回溯；可以用递归的方法简化代码。</p>
+<p><strong>例1：哈密顿圈问题</strong><br>描述见广度优先搜索（例1）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">const graph = &#123;</span><br><span class="line">    1:[2,5,6],</span><br><span class="line">    2:[1,3,8],</span><br><span class="line">    3:[2,4,10],</span><br><span class="line">    4:[3,5,12],</span><br><span class="line">    5:[1,4,14],</span><br><span class="line">    6:[1,7,15],</span><br><span class="line">    7:[6,8,16],</span><br><span class="line">    8:[2,7,9],</span><br><span class="line">    9:[8,10,17],</span><br><span class="line">    10:[3,9,11],</span><br><span class="line">    11:[10,12,18],</span><br><span class="line">    12:[4,11,13],</span><br><span class="line">    13:[12,14,19],</span><br><span class="line">    14:[5,13,15],</span><br><span class="line">    15:[6,14,20],</span><br><span class="line">    16:[7,17,20],</span><br><span class="line">    17:[9,16,18],</span><br><span class="line">    18:[11,17,19],</span><br><span class="line">    19:[13,18,20],</span><br><span class="line">    20:[15,16,19]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">let</span> flag = <span class="literal">false</span></span><br><span class="line"><span class="keyword">function</span> dfs(start,visited)&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="built_in">let</span> i = 0; i &lt; 3; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(!visited.includes(graph[start][i]))&#123;</span><br><span class="line">            <span class="built_in">let</span> newVisited = [...visited, graph[start][i]]</span><br><span class="line">            <span class="keyword">if</span>(newVisited.length == 20 &amp;&amp; graph[newVisited[newVisited.length - 1]].includes(newVisited[0]))&#123;</span><br><span class="line">                console.log(newVisited)</span><br><span class="line">                flag = <span class="literal">true</span></span><br><span class="line">                <span class="built_in">break</span></span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                dfs(graph[start][i],newVisited);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> flag</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">console.log(dfs(1,[1]))</span><br></pre></td></tr></table></figure>
+
+<p><strong>tips：</strong>函数递归调用时不要直接return结果，因为它实际是多层函数的嵌套，直接返回函数值意义不大，所以上述代码使用了布尔变量flag存储结果。</p>
+<p><strong>例2：二叉树左下角的值</strong><br>描述见广度优先搜索（例2）</p>
+<p><strong>解：</strong>可以看作“计算二叉树高度”的递归算法的扩展，只需要加一个变量记录最深处节点，还有一个细节是把左子树的递归写在右子树之前，保证变量记录的是最深处最左边的节点值。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">var findBottomLeftValue = <span class="keyword">function</span>(root) &#123;</span><br><span class="line">    const dfs = (root, height) =&gt; &#123;</span><br><span class="line">        <span class="keyword">if</span>(!root)&#123;</span><br><span class="line">            <span class="built_in">return</span></span><br><span class="line">        &#125;</span><br><span class="line">        height++</span><br><span class="line">        dfs(root.left, height)</span><br><span class="line">        dfs(root.right, height)</span><br><span class="line">        <span class="keyword">if</span>(height &gt; curHeight)&#123;</span><br><span class="line">            curHeight = height</span><br><span class="line">            curVal = root.val</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">let</span> curVal = null</span><br><span class="line">    <span class="built_in">let</span> curHeight = 0</span><br><span class="line">    dfs(root, 0)</span><br><span class="line">    <span class="built_in">return</span> curVal</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>例3：出现次数最多的子树元素和</strong><br>LeetCode508，链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/most-frequent-subtree-sum/">https://leetcode.cn/problems/most-frequent-subtree-sum/</a></p>
+<p>给出一个二叉树的根结点 root ，返回出现次数最多的子树元素和。如果有多个元素出现的次数相同，返回所有出现次数最多的子树元素和（不限顺序）。<br>一个结点的 「子树元素和」 定义为以该结点为根的二叉树上所有结点的元素之和（包括结点本身）。</p>
+<p>输入: root &#x3D; [5,2,-3]<br>输出: [2,-3,4]</p>
+<p>输入: root &#x3D; [5,2,-5]<br>输出: [2]</p>
+<p><strong>解：</strong>用一个哈希表存储子树元素和以及它出现的次数，利用广度优先搜索更新哈希表。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">var findFrequentTreeSum = <span class="keyword">function</span>(root) &#123;</span><br><span class="line">    const result = []</span><br><span class="line">    var count = new Map()</span><br><span class="line">    <span class="built_in">let</span> maxCount = 0</span><br><span class="line">    </span><br><span class="line">    const dfs = (node) =&gt; &#123;</span><br><span class="line">        <span class="keyword">if</span>(!node)&#123;</span><br><span class="line">            <span class="built_in">return</span> 0</span><br><span class="line">        &#125;</span><br><span class="line">        const <span class="built_in">sum</span> = node.val + dfs(node.left) + dfs(node.right)</span><br><span class="line">        count.set(<span class="built_in">sum</span>, (count.get(<span class="built_in">sum</span>) || 0) + 1)</span><br><span class="line">        maxCount = Math.max(maxCount, count.get(<span class="built_in">sum</span>))</span><br><span class="line">        <span class="built_in">return</span> <span class="built_in">sum</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    dfs(root)</span><br><span class="line">    <span class="keyword">for</span>(<span class="built_in">let</span> [<span class="built_in">sum</span>, <span class="built_in">times</span>] of count)&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">times</span> === maxCount)&#123;</span><br><span class="line">            result.push(<span class="built_in">sum</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> result</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="target-sum"><a href="#target-sum" class="headerlink" title="target-sum"></a>target-sum</h3><p>LeetCode494，链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/target-sum/">https://leetcode.cn/problems/target-sum/</a></p>
+<p>给出一个整数数组 nums 和一个整数 target ，向数组中的每个整数前添加 ‘+’ 或 ‘-‘ ，然后串联起所有整数，可以构造一个表达式：<br>例如，nums &#x3D; [2, 1] ，可以在 2 之前添加 ‘+’ ，在 1 之前添加 ‘-‘ ，然后串联起来得到表达式 “+2-1” 。<br>返回可以通过上述方法构造的、运算结果等于 target 的不同 表达式 的数目。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">var findTargetSumWays = <span class="keyword">function</span>(nums, target) &#123;</span><br><span class="line">    <span class="built_in">let</span> count = 0</span><br><span class="line">    const search = (index, <span class="built_in">sum</span>) =&gt; &#123;</span><br><span class="line">        <span class="keyword">if</span>(index === nums.length)&#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="built_in">sum</span> === target)&#123;</span><br><span class="line">                count++</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">return</span></span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            search(index + 1, <span class="built_in">sum</span> + nums[index])</span><br><span class="line">            search(index + 1, <span class="built_in">sum</span> - nums[index])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    search(0,0)</span><br><span class="line">    <span class="built_in">return</span> count</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="generate-parentheses"><a href="#generate-parentheses" class="headerlink" title="generate-parentheses"></a>generate-parentheses</h3><p>LeetCode22，链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/generate-parentheses/">https://leetcode.cn/problems/generate-parentheses/</a></p>
+<p>输入 n 代表括号的对数，生成所有有效的括号组合。</p>
+<p>输入：n &#x3D; 3<br>输出：[“((()))”,”(()())”,”(())()”,”()(())”,”()()()”]</p>
+<p><strong>解：</strong>采用回溯法，注意“有效”条件的判断，即对于任何一个中间过程，右括号的数量都不能超过左括号的数量。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">var generateParenthesis = <span class="keyword">function</span>(n) &#123;</span><br><span class="line">    const ans = []</span><br><span class="line">    const f = (left, right, cur, choice) =&gt; &#123;</span><br><span class="line">        <span class="keyword">if</span>(choice === <span class="string">&#x27;left&#x27;</span>)&#123;</span><br><span class="line">            cur += <span class="string">&#x27;(&#x27;</span></span><br><span class="line">            left++</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            cur += <span class="string">&#x27;)&#x27;</span></span><br><span class="line">            right++</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(left === right &amp;&amp; left === n)&#123;</span><br><span class="line">            ans.push(cur)</span><br><span class="line">            <span class="built_in">return</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(left &gt; right &amp;&amp; left &lt; n)&#123;</span><br><span class="line">            f(left, right, cur, <span class="string">&#x27;left&#x27;</span>)</span><br><span class="line">            f(left, right, cur, <span class="string">&#x27;right&#x27;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(left === right)&#123;</span><br><span class="line">            f(left, right, cur, <span class="string">&#x27;left&#x27;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(left === n)&#123;</span><br><span class="line">            f(left, right, cur, <span class="string">&#x27;right&#x27;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    f(0, 0, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;left&#x27;</span>)</span><br><span class="line">    <span class="built_in">return</span> ans</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="all-subsets"><a href="#all-subsets" class="headerlink" title="all-subsets"></a>all-subsets</h3><p>基于位串生成，可满足挤压序，但不满足最小变化要求，复杂度O(n*2^n)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">var subsets = <span class="keyword">function</span>(nums) &#123;</span><br><span class="line">    const n = nums.length</span><br><span class="line">    const results = []</span><br><span class="line">    <span class="keyword">for</span>(<span class="built_in">let</span> i = 0; i &lt; Math.pow(2, n); i++)&#123;</span><br><span class="line">        <span class="built_in">let</span> l = []</span><br><span class="line">        <span class="keyword">for</span>(<span class="built_in">let</span> j = 0; j &lt; n; j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(i &amp; (1 &lt;&lt; <span class="string">j))&#123;</span></span><br><span class="line"><span class="string">                l.push(nums[j</span>])</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        results.push(l)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> results</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            联系邮箱
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+
+                  
+                  <span class="site-state-item-name">1746874167@qq.com</span>
+                
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#BFS"><span class="nav-number">1.</span> <span class="nav-text">BFS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DFS"><span class="nav-number">2.</span> <span class="nav-text">DFS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#target-sum"><span class="nav-number">3.</span> <span class="nav-text">target-sum</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#generate-parentheses"><span class="nav-number">4.</span> <span class="nav-text">generate-parentheses</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#all-subsets"><span class="nav-number">5.</span> <span class="nav-text">all-subsets</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">林轶航</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

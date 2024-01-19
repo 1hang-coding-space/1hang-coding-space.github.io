@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="k-diff-pairs-in-an-arrayLeetCode532，链接：https:&#x2F;&#x2F;leetcode.cn&#x2F;problems&#x2F;k-diff-pairs-in-an-array&#x2F; 给出一个整数数组nums和一个整数k，在数组中找出不同的k-diff数对，并返回不同的k-diff数对的数目。k-diff数对定义为一个整数对(nums[i], nums[j])，并满足下述全部条件： 0 &amp;lt">
+<meta property="og:type" content="website">
+<meta property="og:title" content="动态规划&#x2F;贪心算法">
+<meta property="og:url" content="http://example.com/dp/index.html">
+<meta property="og:site_name" content="red kk">
+<meta property="og:description" content="k-diff-pairs-in-an-arrayLeetCode532，链接：https:&#x2F;&#x2F;leetcode.cn&#x2F;problems&#x2F;k-diff-pairs-in-an-array&#x2F; 给出一个整数数组nums和一个整数k，在数组中找出不同的k-diff数对，并返回不同的k-diff数对的数目。k-diff数对定义为一个整数对(nums[i], nums[j])，并满足下述全部条件： 0 &amp;lt">
+<meta property="og:locale">
+<meta property="article:published_time" content="2022-05-17T12:48:09.000Z">
+<meta property="article:modified_time" content="2022-08-22T09:04:17.958Z">
+<meta property="article:author" content="林轶航">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/dp/"/>
+
+
+
+
+
+  <title>动态规划/贪心算法 | red kk</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">red kk</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">往者不可谏，来者犹可追。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            高复杂度蛮力算法
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-分治/减治思想">
+          <a href="/division/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            分治/减治思想
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-动态规划/贪心算法">
+          <a href="/dp/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            动态规划/贪心算法
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-脑筋急转弯">
+          <a href="/brain_teaser/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            脑筋急转弯
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-音乐和生活">
+          <a href="/music_and_life/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            音乐和生活
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+    
+    
+    <div class="post-block page">
+      <header class="post-header">
+
+	<h1 class="post-title" itemprop="name headline">动态规划/贪心算法</h1>
+
+
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+        
+        
+          <h3 id="k-diff-pairs-in-an-array"><a href="#k-diff-pairs-in-an-array" class="headerlink" title="k-diff-pairs-in-an-array"></a>k-diff-pairs-in-an-array</h3><p>LeetCode532，链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/k-diff-pairs-in-an-array/">https://leetcode.cn/problems/k-diff-pairs-in-an-array/</a></p>
+<p>给出一个整数数组nums和一个整数k，在数组中找出不同的k-diff数对，并返回不同的k-diff数对的数目。<br>k-diff数对定义为一个整数对(nums[i], nums[j])，并满足下述全部条件：</p>
+<p>0 &lt;&#x3D; i, j &lt; nums.length<br>i !&#x3D; j<br>|nums[i] - nums[j]| &#x3D;&#x3D; k</p>
+<p><strong>解法1（哈希表）：</strong>由于差值是定值，只需要记录较小的数，最后统计其个数即可。遍历数组，用一个集合记录较小数，一个集合记录已访问过的数。<br>具体操作是每扫描到一个数，检查其±k的数是否已在visited集合中，若在则将较小数放入result集合中，最后将扫描的数放入visited集合。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">var findPairs = <span class="keyword">function</span>(nums, k) &#123;</span><br><span class="line">    const visited = new Set()</span><br><span class="line">    const result = new Set()</span><br><span class="line">    <span class="keyword">for</span>(<span class="built_in">let</span> num of nums)&#123;</span><br><span class="line">        <span class="keyword">if</span>(visited.has(num - k))&#123;</span><br><span class="line">            result.add(num - k)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(visited.has(num + k))&#123;</span><br><span class="line">            result.add(num)</span><br><span class="line">        &#125;</span><br><span class="line">        visited.add(num)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> result.size</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>解法2（排序+双指针）：</strong>对数组非降序排序，用循环移动左指针，当差值小于k时，右移右指针。注意移动左指针时要做去重处理，保证nums[lp] !&#x3D;&#x3D; nums[lp - 1]。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">var findPairs = <span class="keyword">function</span>(nums, k) &#123;</span><br><span class="line">    nums.sort((a,b) =&gt; a - b)</span><br><span class="line">    <span class="built_in">let</span> rp = 0, result = 0, len = nums.length;</span><br><span class="line">    <span class="keyword">for</span>(<span class="built_in">let</span> lp = 0; lp &lt; len; lp++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(lp === 0 || nums[lp] !== nums[lp - 1])&#123;</span><br><span class="line">            <span class="keyword">while</span>(rp &lt; len &amp;&amp; (rp &lt;= lp || nums[rp] &lt; nums[lp] + k))&#123;</span><br><span class="line">                rp++</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(nums[rp] === nums[lp] + k)&#123;</span><br><span class="line">                result++</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> result</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="unique-substrings-in-wraparound-string"><a href="#unique-substrings-in-wraparound-string" class="headerlink" title="unique-substrings-in-wraparound-string"></a>unique-substrings-in-wraparound-string</h3><p>LeetCode467，链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/unique-substrings-in-wraparound-string/">https://leetcode.cn/problems/unique-substrings-in-wraparound-string/</a></p>
+<p>把字符串 s 看作 “abcdefghijklmnopqrstuvwxyz” 的无限环绕字符串，所以 s 看起来是这样的：<br>“…zabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcd….” 。<br>现在给定另一个字符串 p 。返回 s 中不同的 p 的非空子串的数量 。 </p>
+<p>输入：p &#x3D; “zab”<br>输出：6<br>解释：在字符串 s 中有 p 的六个子串 (“z”, “a”, “b”, “za”, “ab”, “zab”) 。</p>
+<p><strong>解：</strong>若用蛮力解法，时间复杂度至少为O(n^2)，即对输入字符串的起点和终点都遍历一遍，还需要检查子串是否已被统计过；<br>采用动态规划的思想，用一个长度为26的数组记录<strong>以每个英文单词结尾的子串的最大长度</strong>，最后返回数组和，时间复杂度O(n)。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">var neighbor = (s1, s2) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span>((s2.charCodeAt() - s1.charCodeAt() == 1) || (s1 == <span class="string">&#x27;z&#x27;</span> &amp;&amp; s2 == <span class="string">&#x27;a&#x27;</span>))&#123;</span><br><span class="line">        <span class="built_in">return</span> <span class="literal">true</span></span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var findSubstringInWraproundString = <span class="keyword">function</span>(p) &#123;</span><br><span class="line">    <span class="keyword">if</span>(p.length == 1) <span class="built_in">return</span> 1</span><br><span class="line">    const dp = new Array(26).fill(0)</span><br><span class="line">    dp[p[0].charCodeAt() - 97] = 1</span><br><span class="line">    <span class="built_in">let</span> count = 1</span><br><span class="line">    <span class="keyword">for</span>(<span class="built_in">let</span> i = 1; i &lt; p.length; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(neighbor(p[i - 1], p[i]))&#123;</span><br><span class="line">            count++</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            count = 1</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(count &gt; dp[p[i].charCodeAt() - 97]) dp[p[i].charCodeAt() - 97] = count</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">let</span> <span class="built_in">sum</span> = 0</span><br><span class="line">    <span class="keyword">for</span>(<span class="built_in">let</span> i = 0; i &lt; 26; i++)&#123;</span><br><span class="line">        <span class="built_in">sum</span> += dp[i]</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> <span class="built_in">sum</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="maximum-subarray-sum"><a href="#maximum-subarray-sum" class="headerlink" title="maximum-subarray-sum"></a>maximum-subarray-sum</h3><p>LeetCode53，链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-subarray/">https://leetcode.cn/problems/maximum-subarray/</a></p>
+<p><strong>解：</strong>动态记录以数组中每个元素结尾的最大子数组，规划方法为 f[ i ] &#x3D; max{nums[ i ], f[i - 1] + nums[ i ]}</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var maxSubArray = <span class="keyword">function</span>(nums) &#123;</span><br><span class="line">    const n = nums.length</span><br><span class="line">    <span class="keyword">if</span>(n === 1) <span class="built_in">return</span> nums[0]</span><br><span class="line">    <span class="built_in">let</span> pre = nums[0], ans = nums[0]</span><br><span class="line">    <span class="keyword">for</span>(<span class="built_in">let</span> i = 1; i &lt; nums.length; i++)&#123;</span><br><span class="line">        pre = Math.max(pre + nums[i], nums[i])</span><br><span class="line">        ans = Math.max(ans, pre)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> ans</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="maximum-subarray-product"><a href="#maximum-subarray-product" class="headerlink" title="maximum-subarray-product"></a>maximum-subarray-product</h3><p>LeetCode152，链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-product-subarray/">https://leetcode.cn/problems/maximum-product-subarray/</a></p>
+<p><strong>解：</strong>这题与上一题“最大子数组和”的区别在于，当前位置的最优解不能直接由前一个位置的最优解转移得到，因为存在负负得正的情况，因此需要动态维护“以当前位置结尾的乘积<strong>最大</strong>子数组”和“以当前位置结尾的乘积<strong>最小</strong>子数组”两个数组。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">var maxProduct = <span class="keyword">function</span>(nums) &#123;</span><br><span class="line">    const n = nums.length</span><br><span class="line">    <span class="keyword">if</span>(n === 1) <span class="built_in">return</span> nums[0]</span><br><span class="line">    const maxArray = new Array(n), minArray = new Array(n)</span><br><span class="line">    <span class="built_in">let</span> ans = nums[0]</span><br><span class="line">    maxArray[0] = nums[0]</span><br><span class="line">    minArray[0] = nums[0]</span><br><span class="line">    <span class="keyword">for</span>(<span class="built_in">let</span> i = 1; i &lt; n; i++)&#123;</span><br><span class="line">        maxArray[i] = Math.max(nums[i], maxArray[i - 1] * nums[i], minArray[i - 1] * nums[i])</span><br><span class="line">        minArray[i] = Math.min(nums[i], maxArray[i - 1] * nums[i], minArray[i - 1] * nums[i])</span><br><span class="line">        ans = Math.max(ans, maxArray[i], minArray[i])</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> ans</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="maximum-subarray-sum-with-one-deletion"><a href="#maximum-subarray-sum-with-one-deletion" class="headerlink" title="maximum-subarray-sum-with-one-deletion"></a>maximum-subarray-sum-with-one-deletion</h3><p>LeetCode1186，链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-subarray-sum-with-one-deletion/">https://leetcode.cn/problems/maximum-subarray-sum-with-one-deletion/</a></p>
+<p><strong>解：</strong>用notDeleted数组记录以当前元素结尾的最大子数组和，用deleted数组记录以当前元素结尾但删除过一个元素的最大子数组和，动态维护方程为deleted[ i ] &#x3D; Math.max(notDeleted[i - 1], deleted[i - 1] + arr[ i ])。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">var maximumSum = <span class="keyword">function</span>(arr) &#123;</span><br><span class="line">    const n = arr.length;</span><br><span class="line">    <span class="keyword">if</span>(n === 1) <span class="built_in">return</span> arr[0];</span><br><span class="line">    const notDeleted = new Array(n), deleted = new Array(n);</span><br><span class="line">    notDeleted[0] = arr[0];</span><br><span class="line">    <span class="built_in">let</span> ans = Math.max(arr[0], arr[1]);</span><br><span class="line">    <span class="keyword">for</span>(<span class="built_in">let</span> i = 1; i &lt; n; i++)&#123;</span><br><span class="line">        notDeleted[i] = Math.max(notDeleted[i - 1] + arr[i], arr[i]);</span><br><span class="line">        ans = Math.max(ans, notDeleted[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    deleted[1] = Math.max(arr[0], arr[1]);</span><br><span class="line">    <span class="keyword">for</span>(<span class="built_in">let</span> i = 2; i &lt; n; i++)&#123;</span><br><span class="line">        deleted[i] = Math.max(notDeleted[i - 1], deleted[i - 1] + arr[i]);</span><br><span class="line">        ans = Math.max(ans, deleted[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> ans;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="longest-increasing-subsequence"><a href="#longest-increasing-subsequence" class="headerlink" title="longest-increasing-subsequence"></a>longest-increasing-subsequence</h3><p>LeetCode300，链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-increasing-subsequence/">https://leetcode.cn/problems/longest-increasing-subsequence/</a></p>
+<p>给出一个整数数组 nums ，找到其中最长严格递增子序列的长度。<br>子序列是由数组派生而来的序列，删除（或不删除）数组中的元素而不改变其余元素的顺序。例如，[3,6,2,7] 是数组 [0,3,1,6,2,2,7] 的子序列。</p>
+<p><strong>解：</strong>创建一个数组list，用于记录数组中以该元素结尾（必须取到该元素）的最长子序列。具体实现方法是依次遍历每个元素i，然后遍历其之前的元素j，若i大于j，则可能实现的最长递增子序列为list[j] + 1，动态更新记录最大值。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">var lengthOfLIS = <span class="keyword">function</span>(nums) &#123;</span><br><span class="line">    var list = new Array(nums.length).fill(1)</span><br><span class="line">    <span class="keyword">for</span>(<span class="built_in">let</span> i = 1; i &lt; nums.length; i++)&#123;</span><br><span class="line">        var m = 1</span><br><span class="line">        <span class="keyword">for</span>(<span class="built_in">let</span> j = 0; j &lt; i; j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[i] &gt; nums[j])&#123;</span><br><span class="line">                m = (list[j] + 1) &gt; m ? (list[j] + 1) : m</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        list[i] = m</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    var maxLen = 1</span><br><span class="line">    list.forEach(x =&gt; &#123;</span><br><span class="line">        <span class="keyword">if</span>(x &gt; maxLen)&#123;</span><br><span class="line">            maxLen = x</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="built_in">return</span> maxLen</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="longest-substring-without-repeating-characters"><a href="#longest-substring-without-repeating-characters" class="headerlink" title="longest-substring-without-repeating-characters"></a>longest-substring-without-repeating-characters</h3><p>LeetCode3，链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-substring-without-repeating-characters/">https://leetcode.cn/problems/longest-substring-without-repeating-characters/</a></p>
+<p><strong>解：</strong>若用蛮力解法，时间复杂度为O(n^2)，考虑到<strong>随着起始位置的递增</strong>，最长无重复字串的<strong>结束位置也必然递增</strong>，因此采用<strong>滑动窗口&#x2F;双指针</strong>思想，将时间复杂度降为O(n)。同样的思想可用于“最长递增子数组”等问题中，但和上述的“最长递增子序列”问题不同。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">var lengthOfLongestSubstring = <span class="keyword">function</span>(s) &#123;</span><br><span class="line">    <span class="keyword">if</span>(s.length === 0) <span class="built_in">return</span> 0</span><br><span class="line">    <span class="built_in">let</span> maxLen = 0</span><br><span class="line">    <span class="built_in">let</span> rp = 0</span><br><span class="line">    <span class="built_in">let</span> subSet = new Set()</span><br><span class="line">    subSet.add(s[0])</span><br><span class="line">    <span class="keyword">for</span>(<span class="built_in">let</span> i = 0; i &lt; s.length; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(i &gt; 0)&#123;</span><br><span class="line">            subSet.delete(s[i - 1])</span><br><span class="line">            subSet.add(s[i])</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(i === rp) rp++</span><br><span class="line">        <span class="keyword">while</span>(rp &lt; s.length &amp;&amp; !subSet.has(s[rp]))&#123;</span><br><span class="line">            subSet.add(s[rp])</span><br><span class="line">            rp++</span><br><span class="line">        &#125;</span><br><span class="line">        maxLen = subSet.size &gt; maxLen ? subSet.size : maxLen</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> maxLen</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="maximum-points-you-can-obtain-from-cards"><a href="#maximum-points-you-can-obtain-from-cards" class="headerlink" title="maximum-points-you-can-obtain-from-cards"></a>maximum-points-you-can-obtain-from-cards</h3><p>LeetCode1423，链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-points-you-can-obtain-from-cards/">https://leetcode.cn/problems/maximum-points-you-can-obtain-from-cards/</a></p>
+<p><strong>解：</strong>若采用dfs暴力递归，复杂度为O(2^n)；采用滑动窗口，一边的边界递减，一边的边界递增，复杂度为O(n)。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">var maxScore = <span class="keyword">function</span>(cardPoints, k) &#123;</span><br><span class="line">    <span class="built_in">let</span> max = 0;</span><br><span class="line">    <span class="keyword">for</span>(<span class="built_in">let</span> i = 0; i &lt; k; i++)&#123;</span><br><span class="line">        max += cardPoints[i]</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">let</span> cur = max;</span><br><span class="line">    <span class="keyword">for</span>(<span class="built_in">let</span> i = 0; i &lt; k; i++)&#123;</span><br><span class="line">        cur -= cardPoints[k - 1 - i];</span><br><span class="line">        cur += cardPoints[cardPoints.length - i - 1]</span><br><span class="line">        max = Math.max(max, cur)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> max</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="replace-the-substring-for-balanced-string"><a href="#replace-the-substring-for-balanced-string" class="headerlink" title="replace-the-substring-for-balanced-string"></a>replace-the-substring-for-balanced-string</h3><p>LeetCode1234，链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/replace-the-substring-for-balanced-string/">https://leetcode.cn/problems/replace-the-substring-for-balanced-string/</a></p>
+<p><strong>解：</strong>滑动窗口以外的剩余子串中，四个字符的数量都小于等于n&#x2F;4，是符合题意的充要条件。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">var balancedString = <span class="keyword">function</span>(s) &#123;</span><br><span class="line">    const map = &#123;<span class="string">&quot;Q&quot;</span>: 0, <span class="string">&quot;W&quot;</span>:0, <span class="string">&quot;E&quot;</span>:0, <span class="string">&quot;R&quot;</span>:0&#125;  // 记录滑动窗口以外的子串字符数量</span><br><span class="line">    <span class="keyword">for</span>(const c of s)&#123;</span><br><span class="line">        map[c]++</span><br><span class="line">    &#125;</span><br><span class="line">    const n = s.length, ave = parseInt(n/4);</span><br><span class="line">    <span class="keyword">if</span>(map[<span class="string">&#x27;Q&#x27;</span>] === ave &amp;&amp; map[<span class="string">&#x27;W&#x27;</span>] === ave &amp;&amp; map[<span class="string">&#x27;E&#x27;</span>] === ave)&#123;</span><br><span class="line">        <span class="built_in">return</span> 0</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">let</span> right = 0, left = 0, minLen = n;</span><br><span class="line">    <span class="keyword">while</span>(right &lt;= n)&#123;  // 右边界不取到</span><br><span class="line">        map[s[right]]--</span><br><span class="line">        right++</span><br><span class="line">        <span class="keyword">while</span>(left &lt; right &amp;&amp; map[<span class="string">&#x27;Q&#x27;</span>] &lt;= ave &amp;&amp; map[<span class="string">&#x27;W&#x27;</span>] &lt;= ave &amp;&amp; map[<span class="string">&#x27;E&#x27;</span>] &lt;= ave &amp;&amp; map[<span class="string">&#x27;R&#x27;</span>] &lt;= ave)&#123;</span><br><span class="line">            minLen = Math.min(minLen, right - left)</span><br><span class="line">            map[s[left]]++</span><br><span class="line">            left++</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> minLen</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="find-k-closest-elements"><a href="#find-k-closest-elements" class="headerlink" title="find-k-closest-elements"></a>find-k-closest-elements</h3><p>LeetCode658，链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-k-closest-elements/">https://leetcode.cn/problems/find-k-closest-elements/</a></p>
+<p><strong>解：</strong>采用滑动窗口，双指针从数组两端逼近，注意左右差值相等时要移动右指针。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var findClosestElements = <span class="keyword">function</span>(arr, k, x) &#123;</span><br><span class="line">    <span class="built_in">let</span> left = 0, right = arr.length - 1;</span><br><span class="line">    <span class="keyword">while</span>(right - left &gt;= k)&#123;</span><br><span class="line">        <span class="keyword">if</span>(x - arr[left] &lt;= arr[right] - x)&#123;</span><br><span class="line">            right--</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            left++</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> arr.slice(left, right + 1)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="longest-fibonacci-subsequence"><a href="#longest-fibonacci-subsequence" class="headerlink" title="longest-fibonacci-subsequence"></a>longest-fibonacci-subsequence</h3><p>LeetCode873，链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/length-of-longest-fibonacci-subsequence/">https://leetcode.cn/problems/length-of-longest-fibonacci-subsequence/</a></p>
+<p><strong>解：</strong>斐波那契子序列由最后两个数决定，因此动态规划的思路为创建二维数组，dp[j] [i] 记录以数组中第i个数和第j个数做结尾的斐波那契子序列长度。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">var lenLongestFibSubseq = <span class="keyword">function</span>(arr) &#123;</span><br><span class="line">    const indices = new Map();</span><br><span class="line">    const n = arr.length;</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">let</span> i = 0; i &lt; n; i++) &#123;</span><br><span class="line">        indices.set(arr[i], i);</span><br><span class="line">    &#125;</span><br><span class="line">    const dp = new Array(n).fill(0).map(() =&gt; new Array(n).fill(0));</span><br><span class="line">    <span class="built_in">let</span> ans = 0;</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">let</span> i = 0; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="built_in">let</span> j = i; j &gt;= 0; j--) &#123;</span><br><span class="line">            <span class="keyword">if</span> (arr[j] * 2 &lt;= arr[i]) &#123;</span><br><span class="line">                <span class="built_in">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (indices.has(arr[i] - arr[j])) &#123;</span><br><span class="line">                const k = indices.get(arr[i] - arr[j]);</span><br><span class="line">                dp[j][i] = Math.max(dp[k][j] + 1, 3);</span><br><span class="line">                ans = Math.max(ans, dp[j][i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> ans;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="subarray-sum-equals-k"><a href="#subarray-sum-equals-k" class="headerlink" title="subarray-sum-equals-k"></a>subarray-sum-equals-k</h3><p>LeetCode560，链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/subarray-sum-equals-k/">https://leetcode.cn/problems/subarray-sum-equals-k/</a></p>
+<p>给你一个整数数组 nums 和一个整数 k ，请你统计并返回该数组中和为 k 的连续子数组的个数。</p>
+<p><strong>解：</strong>若采用蛮力解法，时间复杂度为O(n^2)；采用前缀和+哈希表的思路，时间复杂度和空间复杂度都为O(n)。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">var subarraySum = <span class="keyword">function</span>(nums, k) &#123;</span><br><span class="line">    const n = nums.length</span><br><span class="line">    <span class="keyword">if</span>(n === 1) <span class="built_in">return</span> nums[0] === k ? 1 : 0</span><br><span class="line">    const preSum = new Array(n + 1)</span><br><span class="line">    preSum[0] = 0</span><br><span class="line">    <span class="keyword">for</span>(<span class="built_in">let</span> i = 1; i &lt; n + 1; i++)&#123;</span><br><span class="line">        preSum[i] = preSum[i - 1] + nums[i - 1]</span><br><span class="line">    &#125;</span><br><span class="line">    const map = new Map()</span><br><span class="line">    <span class="built_in">let</span> count = 0</span><br><span class="line">    <span class="keyword">for</span>(<span class="built_in">let</span> i = 0; i &lt; n + 1; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(map.has(preSum[i] - k))&#123;</span><br><span class="line">            count += map.get(preSum[i] - k)</span><br><span class="line">        &#125;</span><br><span class="line">        map.set(preSum[i], map.has(preSum[i]) ? map.get(preSum[i]) + 1 : 1)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> count</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="array-nesting"><a href="#array-nesting" class="headerlink" title="array-nesting"></a>array-nesting</h3><p>LeetCode565，链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/array-nesting/">https://leetcode.cn/problems/array-nesting/</a></p>
+<p>索引从0开始长度为N的数组A，包含0到N - 1的所有整数。找到最大的集合S并返回其大小，其中 S[i] &#x3D; {A[i], A[A[i]], A[A[A[i]]], … }且遵守以下的规则。</p>
+<p>假设选择索引为i的元素A[i]为S的第一个元素，S的下一个元素应该是A[A[i]]，之后是A[A[A[i]]]… 以此类推，不断添加直到S出现重复的元素。</p>
+<p>输入: A &#x3D; [5,4,0,3,1,6,2]<br>输出: 4<br>解释:<br>A[0] &#x3D; 5, A[1] &#x3D; 4, A[2] &#x3D; 0, A[3] &#x3D; 3, A[4] &#x3D; 1, A[5] &#x3D; 6, A[6] &#x3D; 2.</p>
+<p>其中一种最长的 S[K]:<br>S[0] &#x3D; {A[0], A[5], A[6], A[2]} &#x3D; {5, 6, 2, 0}</p>
+<p><strong>解：</strong>用一个无向图记录nums[ i ]与nums[ nums[i] ]的连通情况。由于环的连通性，不必纠结起点和终点，只需要遍历一次数组。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">var arrayNesting = <span class="keyword">function</span>(nums) &#123;</span><br><span class="line">    const n = nums.length</span><br><span class="line">    const graph = new Array(n).fill(<span class="literal">false</span>)</span><br><span class="line">    <span class="built_in">let</span> count = 1</span><br><span class="line">    <span class="keyword">for</span>(<span class="built_in">let</span> i = 0; i &lt; n; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(!graph[i])&#123;</span><br><span class="line">            graph[i] = 1</span><br><span class="line">            <span class="built_in">let</span> k = nums[i], curCount = 1</span><br><span class="line">            <span class="keyword">while</span>(!graph[k])&#123;</span><br><span class="line">                graph[k] = 1</span><br><span class="line">                curCount++</span><br><span class="line">                k = nums[k]</span><br><span class="line">            &#125;</span><br><span class="line">            count = Math.max(count, curCount)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> count</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="painting-the-house"><a href="#painting-the-house" class="headerlink" title="painting-the-house"></a>painting-the-house</h3><p>LeetCode 剑指II 091，链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/JEj789/">https://leetcode.cn/problems/JEj789/</a></p>
+<p>假如有一排房子，共 n 个，每个房子可以被粉刷成红色、蓝色或者绿色这三种颜色中的一种，你需要粉刷所有的房子并且使其相邻的两个房子颜色不能相同。<br>当然，因为市场上不同颜色油漆的价格不同，所以房子粉刷成不同颜色的花费成本也是不同的。每个房子粉刷成不同颜色的花费是以一个 n x 3 的正整数矩阵 costs 来表示的。<br>例如，costs[0][0] 表示第 0 号房子粉刷成红色的成本花费；costs[1][2] 表示第 1 号房子粉刷成绿色的花费，以此类推。<br>请计算出粉刷完所有房子最少的花费成本。</p>
+<p>输入: costs &#x3D; [[17,2,17],[16,16,5],[14,3,19]]<br>输出: 10<br>解释: 将 0 号房子粉刷成蓝色，1 号房子粉刷成绿色，2 号房子粉刷成蓝色。<br>     最少花费: 2 + 5 + 3 &#x3D; 10。</p>
+<p><strong>解：</strong>用一个长度为3、动态更新的数组，记录从第0号到第i号房子刷三种颜色各自的最小总花费。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">var minCost = <span class="keyword">function</span>(costs) &#123;</span><br><span class="line">    var result = costs[0]</span><br><span class="line">    <span class="keyword">if</span>(costs.length === 1)&#123;</span><br><span class="line">        <span class="built_in">return</span> Math.min(costs[0][0], costs[0][1], costs[0][2])</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="built_in">let</span> i = 1; i &lt; costs.length; i++)&#123;</span><br><span class="line">        <span class="built_in">let</span> curResult = [...result]  // 这里一定要深拷贝，不然后续result的值会影响curResult</span><br><span class="line">        <span class="keyword">for</span>(<span class="built_in">let</span> j = 0; j &lt; 3; j++)&#123;</span><br><span class="line">            result[j] = costs[i][j] + Math.min(curResult[(j + 1) % 3], curResult[(j + 2) % 3])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> Math.min(result[0], result[1], result[2])</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Floyd"><a href="#Floyd" class="headerlink" title="Floyd"></a>Floyd</h3><p><strong>解：</strong>最外层的循环代表中介点，里面两层循环是元素在图中的定位。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="built_in">let</span> k = 0; k &lt; n; k++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="built_in">let</span> i = 0; i &lt; n; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="built_in">let</span> j = 0; j &lt; n; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(i !== j) graph[i][j] = Math.min(graph[i][j], graph[i][k] + graph[k][j])</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+        
+      </div>
+      
+      
+      
+    </div>
+    
+    
+    
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            联系邮箱
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+
+                  
+                  <span class="site-state-item-name">1746874167@qq.com</span>
+                
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#k-diff-pairs-in-an-array"><span class="nav-number">1.</span> <span class="nav-text">k-diff-pairs-in-an-array</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#unique-substrings-in-wraparound-string"><span class="nav-number">2.</span> <span class="nav-text">unique-substrings-in-wraparound-string</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#maximum-subarray-sum"><span class="nav-number">3.</span> <span class="nav-text">maximum-subarray-sum</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#maximum-subarray-product"><span class="nav-number">4.</span> <span class="nav-text">maximum-subarray-product</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#maximum-subarray-sum-with-one-deletion"><span class="nav-number">5.</span> <span class="nav-text">maximum-subarray-sum-with-one-deletion</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#longest-increasing-subsequence"><span class="nav-number">6.</span> <span class="nav-text">longest-increasing-subsequence</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#longest-substring-without-repeating-characters"><span class="nav-number">7.</span> <span class="nav-text">longest-substring-without-repeating-characters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#maximum-points-you-can-obtain-from-cards"><span class="nav-number">8.</span> <span class="nav-text">maximum-points-you-can-obtain-from-cards</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#replace-the-substring-for-balanced-string"><span class="nav-number">9.</span> <span class="nav-text">replace-the-substring-for-balanced-string</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#find-k-closest-elements"><span class="nav-number">10.</span> <span class="nav-text">find-k-closest-elements</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#longest-fibonacci-subsequence"><span class="nav-number">11.</span> <span class="nav-text">longest-fibonacci-subsequence</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#subarray-sum-equals-k"><span class="nav-number">12.</span> <span class="nav-text">subarray-sum-equals-k</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#array-nesting"><span class="nav-number">13.</span> <span class="nav-text">array-nesting</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#painting-the-house"><span class="nav-number">14.</span> <span class="nav-text">painting-the-house</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Floyd"><span class="nav-number">15.</span> <span class="nav-text">Floyd</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">林轶航</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

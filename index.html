@@ -334,6 +334,79 @@
 <!-- -->
 
 <!-- ## Quick Start -->
+<script type="text/javascript">
+const __prefix = 'language-'
+const __tabs__nav__height = '40px'
+ 
+const __regularExp = new RegExp(`\\b${__prefix}\\w+\\b`)
+ 
+const __label = {
+    'language-java': 'Java',
+    parse: function(clazz) {
+        return this[clazz] ?? clazz.slice(__prefix.length)
+    }
+}
+ 
+$('.__tabs').each(function() {
+    let flag = true
+    const containers = []
+    $(this).find(`code[class*=${__prefix}]`).each(function() {
+        const matched = $(this).attr('class').match(__regularExp)
+        if (!matched || matched.length != 1) {
+            flag = false
+        }
+        const container = $(this).parent()
+        if (container.prop('tagName') !== 'PRE') {
+            flag = false
+        }
+        if (!flag) return false
+        containers.push({
+            label: __label.parse(matched[0]),
+            dom: container
+        })
+    })
+    if (!flag || !containers.length) return true
+    const header = $('<ul>', {
+        class: '__tabs__nav-wrap',
+        css: {
+            listStyle: 'none',
+            userSelect: 'none',
+            height: __tabs__nav__height,
+            fontSize: 0,
+            margin: 0,
+            padding: 0
+        }
+    })
+    let actived;
+    $.each(containers, function(index, container) {
+        const item = $('<li>', {
+            text: container.label,
+            class: index ? '__tabs__item' : '__tabs__item is-active',
+            css: {
+                display: 'inline-block',
+                position: 'relative',
+                lineHeight: __tabs__nav__height,
+                fontSize: '16px',
+                margin: 0,
+                padding: '0 8px'
+            }
+        })
+        container.dom.css('margin-top', 0)
+        if (index) container.dom.hide()
+        else actived = item
+        item.click(function() {
+            if (actived == item) return
+            $.each(containers, (_, container) => container.dom.hide())
+            actived.removeClass('is-active')
+            item.addClass('is-active')
+            actived = item
+            container.dom.show()
+        })
+        header.append(item)
+    })
+    $(this).prepend(header)
+})
+</script>
 
 <h3 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h3><p>核心数据结构为<strong>队列</strong>，基本操作为元素出队列，将其基础上的“趋向目标”元素入队列，循环重复直至满足条件或队列空。</p>
 <p><strong>例1：哈密顿圈问题</strong></p>

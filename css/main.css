@@ -3126,6 +3126,8 @@ pre .javascript .function {
   }
 }
 
+
+/* 新增的多选代码块样式https://www.cnblogs.com/Amewomatsu/p/18267907 */
 .__tabs {
   border: 1px solid #e5e5e5;
   border-radius: .5rem;

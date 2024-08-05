@@ -3125,3 +3125,31 @@ pre .javascript .function {
     margin: 8px 0 0;
   }
 }
+
+.__tabs {
+  border: 1px solid #e5e5e5;
+  border-radius: .5rem;
+  overflow: hidden;
+}
+
+.__tabs__nav-wrap {
+  color: #3c3c434d;
+}
+
+.__tabs__item {
+  padding: 0 12px !important;
+}
+
+.__tabs__item.is-active, .__tabs__item:hover {
+  color: #262626;
+}
+
+.__tabs__item~.__tabs__item:before {
+  background-color: #0000000d;
+  content: " ";
+  height: 12px;
+  left: 0;
+  position: absolute;
+  top: calc(50% - 6px);
+  width: 1px;
+}

@@ -3078,6 +3078,8 @@ pre .javascript .function {
   }
   .posts-expand .post-button {
     margin-top: 20px;
+    border:#262a30;
+    border: 2px;
   }
   .post-block {
     padding: 20px;

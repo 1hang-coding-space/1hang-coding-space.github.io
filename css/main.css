@@ -1164,7 +1164,7 @@ pre .javascript .function {
   margin-top: 2px;
   padding: 9px 10px;
   background: lightgrey;
-  border: none;
+  /* border: none; */
 }
 @media (max-width: 767px) {
   .site-nav {

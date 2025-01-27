@@ -1163,8 +1163,8 @@ pre .javascript .function {
 .site-nav-toggle button {
   margin-top: 2px;
   padding: 9px 10px;
-  background: lightgrey;
-  /* border: none; */
+  background: grey;
+  border: none;
 }
 @media (max-width: 767px) {
   .site-nav {

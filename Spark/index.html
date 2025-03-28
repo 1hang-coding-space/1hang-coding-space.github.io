@@ -79,17 +79,45 @@
 
 
 
-<meta name="description" content="Spark">
+<meta name="description" content="概述基本概念Spark：基于Hadoop MapReduce的分布式计算引擎（框架），同时优化了内部流程，提高了效率；应用场景囊括了大部分离线数据分析和少部分实时数据分析    单机：单进程，单节点；一个JAVA虚拟机的进程在一个电脑运行，在生产环境中资源（尤其是内存）不够，因为JVM启动后会申请一定的内存，进程中的线程可以抢占CPU的核，但内存被配置了 伪分布式：多进程，单节点（dfs.repl">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Coding Blog">
+<meta property="og:title" content="Spark">
 <meta property="og:url" content="http://example.com/Spark/index.html">
 <meta property="og:site_name" content="Coding Blog">
-<meta property="og:description" content="Spark">
+<meta property="og:description" content="概述基本概念Spark：基于Hadoop MapReduce的分布式计算引擎（框架），同时优化了内部流程，提高了效率；应用场景囊括了大部分离线数据分析和少部分实时数据分析    单机：单进程，单节点；一个JAVA虚拟机的进程在一个电脑运行，在生产环境中资源（尤其是内存）不够，因为JVM启动后会申请一定的内存，进程中的线程可以抢占CPU的核，但内存被配置了 伪分布式：多进程，单节点（dfs.repl">
 <meta property="og:locale">
-<meta property="article:published_time" content="2025-03-28T13:52:00.768Z">
-<meta property="article:modified_time" content="2025-03-28T13:52:00.768Z">
+<meta property="og:image" content="http://example.com/Spark/Spark/images/image-20250201232536550.png">
+<meta property="og:image" content="http://example.com/Spark/Spark/images/image-20250202152246897.png">
+<meta property="og:image" content="https://pic1.zhimg.com/v2-5096857b46d4cae9bccea5827e0b5ea8_r.jpg">
+<meta property="og:image" content="http://example.com/Spark/Spark/images/image-20250202162613131.png">
+<meta property="og:image" content="https://pic2.zhimg.com/v2-649dd3fe115da8d1767468d8443404bf_r.jpg">
+<meta property="og:image" content="http://example.com/Spark/Spark/images/image-20250202184808016.png">
+<meta property="og:image" content="http://example.com/Spark/images/clip_image002.png">
+<meta property="og:image" content="http://example.com/Spark/Spark/images/image-20250202191907947.png">
+<meta property="og:image" content="http://example.com/Spark/Spark/images/image-20250203095245776.png">
+<meta property="og:image" content="http://example.com/Spark/images/image-20250203112552366.png">
+<meta property="og:image" content="http://example.com/Spark/images/image-20250206134622803.png">
+<meta property="og:image" content="http://example.com/Spark/Spark/images/clip_image002-17388290879211.png">
+<meta property="og:image" content="http://example.com/Spark/Spark/images/clip_image002-17388294127502.png">
+<meta property="og:image" content="http://example.com/Spark/Spark/images/image-20250206165232025.png">
+<meta property="og:image" content="http://example.com/Spark/Spark/images/image-20250217155547615.png">
+<meta property="og:image" content="http://example.com/Spark/Spark/images/image-20250217170010298.png">
+<meta property="og:image" content="http://example.com/Spark/Spark/images/image-20250220115544984.png">
+<meta property="og:image" content="http://example.com/Spark/images/image-20250305200127567.png">
+<meta property="og:image" content="http://example.com/Spark/images/image-20250306000733388.png">
+<meta property="og:image" content="http://example.com/Spark/images/image-20250306204508766.png">
+<meta property="og:image" content="http://example.com/Spark/images/image-20250306205012675.png">
+<meta property="og:image" content="http://example.com/Spark/images/image-20250309092803883.png">
+<meta property="og:image" content="http://example.com/Spark/images/image-20250309093717859.png">
+<meta property="og:image" content="http://example.com/Spark/images/image-20250309143358786.png">
+<meta property="og:image" content="http://example.com/Spark/Spark/images/image-20250309155810415.png">
+<meta property="og:image" content="http://example.com/Spark/images/image-20250310221141038.png">
+<meta property="og:image" content="http://example.com/Spark/images/image-20250310221208887.png">
+<meta property="article:published_time" content="2025-03-28T13:59:01.358Z">
+<meta property="article:modified_time" content="2025-03-28T13:59:01.358Z">
 <meta property="article:author" content="林轶航">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/Spark/Spark/images/image-20250201232536550.png">
 
 
 
@@ -125,7 +153,7 @@
 
 
 
-  <title> | Coding Blog</title>
+  <title>Spark | Coding Blog</title>
   
 
 
@@ -275,7 +303,7 @@
     <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline"></h1>
+	<h1 class="post-title" itemprop="name headline">Spark</h1>
 
 
 
@@ -287,7 +315,454 @@
       <div class="post-body">
         
         
-          <h2 id="Spark"><a href="#Spark" class="headerlink" title="Spark"></a>Spark</h2>
+          <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>Spark：基于Hadoop MapReduce的分布式计算引擎（框架），同时优化了内部流程，提高了效率；应用场景囊括了大部分离线数据分析和少部分实时数据分析</p>
+<img src="./Spark/images/image-20250201232536550.png" alt="image-20250201232536550" style="zoom: 20%;" />
+
+<ul>
+<li>单机：单进程，单节点；一个JAVA虚拟机的进程在一个电脑运行，在生产环境中资源（尤其是内存）不够，因为JVM启动后会申请一定的内存，进程中的线程可以抢占CPU的核，但内存被配置了</li>
+<li>伪分布式：多进程，单节点（dfs.replication设为1）；在一个节点上启动多个进程（NameNode、SecondaryNameNode、DataNode、ResourceManager、NodeManager）能获取更多的内存资源；另外，多个进程抢占CPU的能力更强，因为虽然线程是CPU调度的最小单位，但抢占CPU是由进程完成的（进程是资源分配的基本单位）</li>
+<li>分布式：多进程，多节点</li>
+</ul>
+<img src="./Spark/images/image-20250202152246897.png" alt="image-20250202152246897" style="zoom: 33%;" />
+
+
+
+<ul>
+<li>集群中心化：主从结构，主角色管理，从角色执行，比如NameNode&#x2F;SecondaryNameNode与DataNode、ResourceManager与NodeManager，客户端只要连接到中心就能连接到集群；但他也有风险，如果主节点down掉就不可用。所以一般会有备份——正在运行的主节点active，备用的主节点standby</li>
+<li>集群去中心化：仍然有中心，但集群的任何节点都能当中心</li>
+</ul>
+<img src="https://pic1.zhimg.com/v2-5096857b46d4cae9bccea5827e0b5ea8_r.jpg" alt="img" style="zoom: 67%;" />
+
+<ul>
+<li>系统：完整的计算机程序，已经实现了完备的功能，比如HDFS、Kafka</li>
+<li>框架：不完整的计算机程序，包装了核心基础功能，但需要提供一些和业务相关的代码、逻辑以实现完整的功能，如MapReduce、Spark</li>
+<li>引擎：核心功能</li>
+</ul>
+<p>这里的系统，简单讲就是完整的工具，框架是协助开发的，它一定是不完整的，因为没人知道你会开发什么，只是<strong>不管你开发什么都需要一些共同的基础，所以产生了框架</strong></p>
+<p>单机模式下Spark流程图：</p>
+<img src="./Spark/images/image-20250202162613131.png" alt="image-20250202162613131" style="zoom: 50%;" />
+
+<h2 id="架构及生态"><a href="#架构及生态" class="headerlink" title="架构及生态"></a>架构及生态</h2><p>Spark 除了 Spark Core 外，还由多个组件组成，目前主要有四个组件：Spark SQL、Spark Streaming、MLlib、GraphX。这四个组件加上 Spark Core 组成了 Spark 的生态。通常我们在编写一个 Spark 应用程序，需要用到 Spark</p>
+<img src="https://pic2.zhimg.com/v2-649dd3fe115da8d1767468d8443404bf_r.jpg" alt="img" style="zoom:50%;" />
+
+<ul>
+<li><p><strong>Spark Core：</strong>是 Spark 的核心，主要负责任务调度等管理功能。Spark Core 的实现依赖于 RDDs（Resilient Distributed Datasets,<br>弹性分布式数据集）的程序抽象概念。</p>
+</li>
+<li><p><strong>Spark SQL：</strong>是 Spark 处理结构化数据的模块，该模块旨在将熟悉的 SQL 数据库查询与更复杂的基于算法的分析相结合，Spark<br>SQL 支持开源 Hive 项目及其类似 SQL 的 HiveQL 查询语法。Spark SQL 还支持 JDBC 和 ODBC 连接，能够直接连接现有的数据库。</p>
+</li>
+<li><p><strong>Spark Streaming：</strong>这个模块主要是对流数据的处理，支持流数据的可伸缩和容错处理，可以与 Flume（针对数据日志进行优化的一个系统）和 Kafka（针对分布式消息传递进行优化的流处理平台）等已建立的数据源集成。Spark Streaming 的实现，也使用 RDD 抽象的概念，使得在为流数据（如批量历史日志数据）编写应用程序时，能够更灵活，也更容易实现。</p>
+</li>
+<li><p><strong>MLlib：</strong>主要用于机器学习领域，它实现了一系列常用的机器学习和统计算法，如分类、回归、聚类、主成分分析等算法。</p>
+</li>
+<li><p><strong>GraphX：</strong>这个模块主要支持数据图的分析和计算，并支持图形处理的 Pregel API 版本。GraphX 包含了许多被广泛理解的图形算法，如 PageRank。</p>
+</li>
+</ul>
+<h2 id="Spark-vs-MapReduce"><a href="#Spark-vs-MapReduce" class="headerlink" title="Spark vs MapReduce"></a>Spark vs MapReduce</h2><ul>
+<li>开发语言：MR基于JAVA，不适合大量的数据处理（面向对象会耗内存）；Spark基于Scala，虽然基于JAVA但属于函数式编程语言，适合大量的数据处理</li>
+<li>处理方式：MR提炼大量对象，并且运行过程中Shuffle和大量读写磁盘的操作使运行效率降低；Hadoop出现得早（MapReduce2004年），只考虑单一计算的操作，需要靠磁盘完成数据的中转，即<strong>多次落盘</strong>；而<strong>Spark将中间结果存储在内存中</strong>；如果数据量特别大内存不够用Spark就不适用</li>
+</ul>
+<img src="./Spark/images/image-20250202184808016.png" alt="image-20250202184808016" style="zoom: 50%;" />
+
+<p><img src="/./Spark/images/clip_image002.png" alt="img"></p>
+<h1 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h1><h2 id="基本概念-1"><a href="#基本概念-1" class="headerlink" title="基本概念"></a>基本概念</h2><ul>
+<li>部署：将软件安装到什么位置</li>
+<li>部署Spark：决定Spark的程序逻辑在谁提供的资源中执行</li>
+</ul>
+<img src="./Spark/images/image-20250202191907947.png" alt="image-20250202191907947" style="zoom: 33%;" />
+
+<ul>
+<li>如果资源是当前单节点提供的，就称为单机模式</li>
+<li>如果资源是当前多节点提供的，就称为分布式模式</li>
+<li>如果资源是Yarn提供的，就称为Yarn部署环境</li>
+<li>如果资源是Spark提供的，即Spark自带的任务调度模式，就称为Spark部署环境（Standalone）</li>
+</ul>
+<p>在生产环境中，主要采用Yarn（资源管理） + Spark（计算），也称为Spark on Yarn</p>
+<ul>
+<li>Hadoop 1.x：MR计算和资源管理耦合在一起</li>
+<li>Hadoop 2.x &#x3D;&gt; Yarn版本，将资源和计算进行解耦合，可以形成多种搭配 Yarn + MR（Spark，Flink）</li>
+</ul>
+<h2 id="文件结构"><a href="#文件结构" class="headerlink" title="文件结构"></a>文件结构</h2><img src="./Spark/images/image-20250203095245776.png" alt="image-20250203095245776" style="zoom:50%;" />
+
+<ul>
+<li>bin：即binary，存放可执行文件、脚本文件，其中主要为shell脚本（.sh）以及Windows批处理文件（.cmd）</li>
+<li>conf：即configuration，配置文件，存放.template模版文件，通常不起作用</li>
+<li>data：包括一些模块的数据，比如streaming、MLlib的数据</li>
+<li>example：官方案例，主要包含案例的jar包和src源码</li>
+<li>jars：存放Spark运行依赖的jar包</li>
+<li>sbin：存放系统管理的必备程序，也可理解为s开头的命令（比如start-all.sh、stop-all.sh）</li>
+</ul>
+<h2 id="本地模式"><a href="#本地模式" class="headerlink" title="本地模式"></a>本地模式</h2><p>官方案例计算圆周率：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bin/spark-submit \</span><br><span class="line">--class org.apache.spark.examples.SparkPi \</span><br><span class="line">--master local[2] \</span><br><span class="line">./examples/jars/spark-examples_2.12-3.3.1.jar \</span><br><span class="line">10</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>–class代表运行的文件（默认scala），org.apache.spark.examples.SparkPi就是Scala编写的，要看源码的话在examples&#x2F;src&#x2F;main&#x2F;scala&#x2F;org&#x2F;apache&#x2F;spark&#x2F;examples</p>
+</li>
+<li><p>–master代表运行的环境，[2]是spark工作时用多少个线程进行计算，local模式用1或2就行，yarn模式在本地一般用local[*]，和机器CPU核数量一样的线程</p>
+</li>
+</ul>
+<p>运行时会启动SparkSubmit进程，运行结束就终止进程释放资源。</p>
+<p>如果要查看进度可以访问Spark Web UI，即node1:4040</p>
+<p><img src="/./Spark/images/image-20250203112552366.png" alt="image-20250203112552366"></p>
+<h2 id="Yarn模式"><a href="#Yarn模式" class="headerlink" title="Yarn模式"></a>Yarn模式</h2><p><img src="/./Spark/images/image-20250206134622803.png" alt="image-20250206134622803"></p>
+<p>Spark程序的执行依赖Scala，但是Yarn集群是基于Hadoop，由JAVA编写的，因此<strong>在运行Spark时需要暂时性上传Scala相关的环境依赖至HDFS（&#x2F;tmp），运行结束后删除</strong></p>
+<p>调用Yarn集群运行示例：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">bin/spark-submit \</span><br><span class="line">--class org.apache.spark.examples.SparkPi \</span><br><span class="line">--master yarn \</span><br><span class="line">--deploy-mode client \</span><br><span class="line">./examples/jars/spark-examples_2.12-3.3.1.jar \</span><br><span class="line">10</span><br></pre></td></tr></table></figure>
+
+<p>–deploy-mode client \  指定运行模式，主要区别在于<strong>Driver程序的运行节点</strong>，默认客户端模式，Driver程序运行在客户端，适用于交互、调试，希望立即看到app的输出；如果用cluster模式，Driver程序运行在由ResourceManager启动的APPMaster，适用于生产环境</p>
+<p>客户端模式：</p>
+<img src="./Spark/images/clip_image002-17388290879211.png" alt="img" style="zoom: 67%;" />
+
+<p>集群模式：</p>
+<img src="./Spark/images/clip_image002-17388294127502.png" alt="img" style="zoom:67%;" />
+
+<p><strong>1.指定Yarn集群路径</strong></p>
+<p>在conf&#x2F;spark-env.sh中添加Yarn集群的配置文件路径</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">YARN_CONF_DIR=$HADOOP_HOME/etc/hadoop</span><br></pre></td></tr></table></figure>
+
+<p>这个目录下的文件包含配置信息（比如yarn-site.xml中指定ResourceManager的地址）</p>
+<p><strong>2.配置历史服务</strong></p>
+<p>为了能从Yarn上关联到Spark历史服务器，需要配置spark历史服务器关联路径。</p>
+<p>目的：<strong>点击yarn（8088）上spark任务的history，进入的是spark历史服务器（18080），而不再是yarn历史服务器（19888）</strong></p>
+<p>1.在conf&#x2F;spark-defaults.conf中配置日志存储路径（hdfs:&#x2F;&#x2F;node1:8020&#x2F;directory）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">spark.eventLog.enabled          true</span><br><span class="line">spark.eventLog.dir               hdfs://node1:8020/directory</span><br></pre></td></tr></table></figure>
+
+<p>2.修改conf&#x2F;spark-env.sh，添加如下配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export SPARK_HISTORY_OPTS=&quot;</span><br><span class="line">-Dspark.history.ui.port=18080 </span><br><span class="line">-Dspark.history.fs.logDirectory=hdfs://node1:8020/directory </span><br><span class="line">-Dspark.history.retainedApplications=30&quot;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>参数1含义：WEBUI访问的端口号为18080</p>
+</li>
+<li><p>参数2含义：指定历史服务器日志存储路径（读）</p>
+</li>
+<li><p>参数3含义：指定保存Application历史记录的个数，如果超过这个值，旧的应用程序信息将被删除，这个是内存中的应用数，而不是页面上显示的应用数。</p>
+</li>
+</ul>
+<p>3.再次于conf&#x2F;spark-defaults.conf添加配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">spark.yarn.historyServer.address=node1:18080</span><br><span class="line">spark.history.ui.port=18080</span><br></pre></td></tr></table></figure>
+
+<p>4.重启Spark历史服务</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sbin/start-history-server.sh</span><br><span class="line">sbin/stop-history-server.sh</span><br></pre></td></tr></table></figure>
+
+<p><strong>无论是18080端口的Spark历史服务还是19888端口的Yarn服务器都需要手动开启</strong></p>
+<p>启动Yarn历史服务器的指令如下，mr-jobhistory-daemon.sh和start-all.sh一样，在$HADOOP_HOME&#x2F;sbin&#x2F;，已被添加到环境变量</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mr-jobhistory-daemon.sh start historyserver</span><br><span class="line">mr-jobhistory-daemon.sh stop historyserver</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="其他运行模式"><a href="#其他运行模式" class="headerlink" title="其他运行模式"></a>其他运行模式</h2><p><strong>Standalone</strong></p>
+<p>Standalone模式是Spark自带的资源调度引擎，构建一个由Master + Worker构成的Spark集群，Spark运行在集群中。</p>
+<img src="./Spark/images/image-20250206165232025.png" alt="image-20250206165232025" style="zoom: 33%;" />
+
+<p><strong>Mesos</strong></p>
+<p>Spark客户端直接连接Mesos；不需要额外构建Spark集群。国内应用比较少，更多的是运用Yarn调度。</p>
+<p>对比：</p>
+<table>
+<thead>
+<tr>
+<th><strong>模式</strong></th>
+<th><strong>Spark安装机器数</strong></th>
+<th><strong>需启动的进程</strong></th>
+<th><strong>所属者</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Local</td>
+<td>1</td>
+<td>无</td>
+<td>Spark</td>
+</tr>
+<tr>
+<td>Standalone</td>
+<td>3</td>
+<td>Master及Worker</td>
+<td>Spark</td>
+</tr>
+<tr>
+<td>Yarn</td>
+<td>1</td>
+<td>Yarn及HDFS</td>
+<td>Hadoop</td>
+</tr>
+</tbody></table>
+<p><strong>端口号</strong></p>
+<p>1）Spark查看当前Spark-shell运行任务情况端口号：4040</p>
+<p>2）Spark历史服务器端口号：18080     （类比于YARN历史服务器端口号：19888）</p>
+<h1 id="RDD"><a href="#RDD" class="headerlink" title="RDD"></a>RDD</h1><h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><p>RDD（Resilient Distributed Dataset）叫做弹性分布式数据集，是Spark中最基本的数据抽象，是<strong>分布式计算模型</strong></p>
+<ol>
+<li>一定是个对象；</li>
+<li>一定封装了大量方法和属性；</li>
+<li>需要适合分布式计算（减小数据规模，并行运算）。</li>
+</ol>
+<ul>
+<li>数据结构：采用特殊的结构组织和管理数据。比如数组（需要连续的内存空间，如果空间有但不连续，会触发垃圾回收）、链表</li>
+<li>数据模型：在数据结构的基础上提供一些功能，例如ArrayList、LinkedList、HashMap</li>
+</ul>
+<p>RDD在执行时，把数据和计算逻辑一起封装，由主节点分发至从节点</p>
+<img src="./Spark/images/image-20250217155547615.png" alt="image-20250217155547615" style="zoom: 33%;" />
+
+
+
+<p>RDD模型可以封装数据的处理逻辑，但这个逻辑不能太复杂，类似于字符串</p>
+<p>RDD的功能类似于字符串的功能，需要通过大量的RDD对象组合在一起实现复杂的功能</p>
+<p>RDD和字符串的区别：</p>
+<ul>
+<li>字符串的功能是单点操作，功能一旦调用就会马上执行</li>
+<li>RDD的功能是分布式操作，功能调用不会马上执行</li>
+</ul>
+<p>多个RDD如何组合在一起实现复杂逻辑：</p>
+<img src="./Spark/images/image-20250217170010298.png" alt="image-20250217170010298" style="zoom: 50%;" />
+
+<p>RDD处理方式和 JAVA IO流完全一样，也采用<strong>装饰者设计模式</strong>来实现功能的组合</p>
+<h2 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h2><p>在Spark中创建RDD的创建方式可以分为三种：从集合中创建RDD、从外部存储创建RDD、从其他RDD创建。</p>
+<p><strong>IDEA环境准备</strong></p>
+<ol>
+<li>创建maven工程或模块</li>
+<li>修改pom.xml增加spark-core的依赖（如果当前环境没有依赖，刷新后IDEA会自动下载）</li>
+<li>如果不希望运行时打印大量日志，可以在resources文件夹中添加log4j2.properties文件，并添加日志配置信息</li>
+<li>构建Spark运行环境</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Spark01_Env</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line"><span class="comment">//      创建Spark配置对象</span></span><br><span class="line">        <span class="keyword">final</span> <span class="type">SparkConf</span> <span class="variable">conf</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SparkConf</span>();</span><br><span class="line">        conf.setMaster(<span class="string">&quot;local[2]&quot;</span>);  <span class="comment">// 2代表Spark用两个线程计算</span></span><br><span class="line">        conf.setAppName(<span class="string">&quot;spark&quot;</span>);</span><br><span class="line">        </span><br><span class="line"><span class="comment">//      构建Spark运行环境</span></span><br><span class="line">        <span class="keyword">final</span> <span class="type">JavaSparkContext</span> <span class="variable">jsc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">JavaSparkContext</span>(conf);</span><br><span class="line"></span><br><span class="line"><span class="comment">//      释放资源</span></span><br><span class="line">        jsc.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Spark01_Env_1</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line"><span class="comment">//      构建Spark运行环境</span></span><br><span class="line">        <span class="keyword">final</span> <span class="type">JavaSparkContext</span> <span class="variable">jsc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">JavaSparkContext</span>(<span class="string">&quot;local&quot;</span>, <span class="string">&quot;spark1&quot;</span>);</span><br><span class="line"><span class="comment">//      构造函数重载：给JavaSparkContext类传入SparkConf对象或是&quot;local&quot;与&quot;spark1&quot;这两个字符串参数，都能正确解析</span></span><br><span class="line"><span class="comment">//      释放资源</span></span><br><span class="line">        jsc.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>从集合中创建</strong></p>
+<p>JavaSparkContext类的parallelize()方法，输入List<T>，输出JavaRDD<T>，带一层展平</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Spark02_RDD_Memory</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">final</span> <span class="type">SparkConf</span> <span class="variable">conf</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SparkConf</span>();</span><br><span class="line">        conf.setMaster(<span class="string">&quot;local[2]&quot;</span>);  <span class="comment">// 2代表Spark用两个线程计算</span></span><br><span class="line">        conf.setAppName(<span class="string">&quot;spark&quot;</span>);</span><br><span class="line">        conf.set(<span class="string">&quot;spark.default.parallelism&quot;</span>, <span class="string">&quot;4&quot;</span>);</span><br><span class="line">        <span class="keyword">final</span> <span class="type">JavaSparkContext</span> <span class="variable">jsc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">JavaSparkContext</span>(conf);</span><br><span class="line"></span><br><span class="line"><span class="comment">//        构建RDD数据处理模型</span></span><br><span class="line"><span class="comment">//        利用环境对象对接【内存数据源】，构建RDD对象</span></span><br><span class="line">        List&lt;String&gt; names = Arrays.asList(<span class="string">&quot;Mike&quot;</span>, <span class="string">&quot;John&quot;</span>, <span class="string">&quot;Alice&quot;</span>);</span><br><span class="line"><span class="comment">//        public &lt;T&gt; JavaRDD&lt;T&gt; parallelize(final List&lt;T&gt; list, final int numSlices</span></span><br><span class="line"><span class="comment">//        parallelize把内存中的数据当做数据源，第一个参数传入集合（对接的数据源），第二个参数传入切片数量（分区数量）</span></span><br><span class="line">        JavaRDD&lt;String&gt; rdd = jsc.parallelize(names);  </span><br><span class="line">        List&lt;String&gt; collect = rdd.collect();  <span class="comment">// JavaRDD类包含多种方法，这里使用collect()</span></span><br><span class="line">        collect.forEach(System.out::println);</span><br><span class="line">        </span><br><span class="line"><span class="comment">//        将数据模型分区后的数据保存到磁盘文件中</span></span><br><span class="line">        rdd.saveAsTextFile(<span class="string">&quot;output&quot;</span>);  <span class="comment">// IDEA默认的相对路径是项目的根目录；几个线程就有几个分区，*就是16个</span></span><br><span class="line">        jsc.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>从外部存储创建</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Spark03_RDD_Disk</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">final</span> <span class="type">SparkConf</span> <span class="variable">conf</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SparkConf</span>();</span><br><span class="line">        conf.setMaster(<span class="string">&quot;local[*]&quot;</span>);</span><br><span class="line">        conf.setAppName(<span class="string">&quot;spark&quot;</span>);</span><br><span class="line">        <span class="keyword">final</span> <span class="type">JavaSparkContext</span> <span class="variable">jsc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">JavaSparkContext</span>(conf);</span><br><span class="line"></span><br><span class="line"><span class="comment">//        构建RDD数据处理模型</span></span><br><span class="line"><span class="comment">//        利用环境对象对接【磁盘数据（文件）】，构建RDD对象</span></span><br><span class="line"><span class="comment">//        textFile(final String path, final int minPartitions)</span></span><br><span class="line">        JavaRDD&lt;String&gt; rdd = jsc.textFile(<span class="string">&quot;data/test.txt&quot;</span>);</span><br><span class="line">        <span class="keyword">final</span> List&lt;String&gt; collect = rdd.collect();</span><br><span class="line">        collect.forEach(System.out::println);</span><br><span class="line">        jsc.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="分区"><a href="#分区" class="headerlink" title="分区"></a>分区</h2><p>怎么理解RDD：</p>
+<ul>
+<li>发挥管道作用——jsc对接数据源，流转数据，但是不存储数据（类似工具类如Arrays）</li>
+<li>泛型：什么样的数据可以通过管道</li>
+<li>RDD可以将数据分区（类似接了多个管道提高流转效率），这个操作是底层完成的，能通过saveAsTextFile()分区保存以便查看；</li>
+</ul>
+<p>Spark在读取<strong>内存&#x2F;集合数据</strong>时，分区数据存在3种不同场合：</p>
+<ol>
+<li>优先使用方法参数 jsc.parallelize(names, 3)</li>
+<li>其次使用环境配置参数 conf.set(“spark.default.parallelism”, “4”)</li>
+<li>再次采用环境默认值（local环境分区数量就是<strong>虚拟核数</strong>）</li>
+</ol>
+<p>Spark在读取<strong>文件&#x2F;磁盘数据</strong>时，分区数据也存在多种场合：</p>
+<ol>
+<li>优先使用方法参数作为<strong>最小分区数</strong> jsc.textFile(“data&#x2F;test.txt”, 4)</li>
+<li>若没有配置则和内存读取一样用默认值**minPartitions &#x3D; math.min(defaultParallelism, 2)**，先取环境配置参数，再取环境默认值</li>
+</ol>
+<p>最小分区数到实际分区数的计算：</p>
+<p>Spark框架式基于MR开发的，当前读取文件的切片数量是由Hadoop决定，切片规则——</p>
+<ul>
+<li>totalSize &#x3D; 7 bytes</li>
+<li>goalSize (MapReduce里就是128MB) &#x3D; totalSize &#x2F; minPartitions &#x3D; 7 &#x2F; 2 &#x3D; 3 bytes</li>
+<li>partitions &#x3D; totalSize &#x2F; goalSize (余数大于goalSize的10%向上取整) &#x3D; 3</li>
+</ul>
+<p><strong>内存读取-数据分配</strong></p>
+<p>Arrays.asList(1, 2, 3, 4, 5, 6)，四个分区</p>
+<p>读取范围：((i * length) &#x2F; numSlices, ((i + 1) * length) &#x2F; numSlices)</p>
+<p>0 &#x3D;&gt; (0, 1) &#x3D;&gt; 读1个</p>
+<p>1 &#x3D;&gt; (1, 3) &#x3D;&gt; 读2个</p>
+<p>2 &#x3D;&gt; (3, 4) &#x3D;&gt; 读1个</p>
+<p>3 &#x3D;&gt; (4, 6) &#x3D;&gt; 读2个</p>
+<p><strong>磁盘读取-数据分配</strong></p>
+<p>Spark不支持文件操作，文件操作是Hadoop完成的。Hadoop文件<strong>切片数量的计算</strong>和<strong>文件数据存储的计算</strong>规则不一样</p>
+<ol>
+<li>分区数量计算的时候，考虑的是尽可能平均（按字节来计算）</li>
+<li>分区数据的存储考虑业务的完整性<strong>（按行来读取）</strong>；读取数据时还要考虑数据偏移量，偏移量从0开始</li>
+</ol>
+<p>txt文件三行分别是1&#x2F;2&#x2F;3，数字一字节，回车两字节，共7 bytes，minPartitions &#x3D; 2，则goalSize &#x3D; 3 bytes，三个分区字节数 3 3 1 </p>
+<p>1@@  &#x3D;&gt; 偏移量012</p>
+<p>2@@  &#x3D;&gt; 偏移量345</p>
+<p>3         &#x3D;&gt; 偏移量6</p>
+<hr>
+<p>0 &#x3D;&gt; [0, 3] &#x3D;&gt; 两边闭区间，<strong>读到了偏移量3还会把偏移量345这一行读取</strong>，相当于第一个分区读了012345六个偏移量，即1\n2</p>
+<p>1 &#x3D;&gt; [3, 6] &#x3D;&gt; 相同的偏移量不会重复读取，只读偏移量6，即3</p>
+<p>2 &#x3D;&gt; [6, 7] &#x3D;&gt; 没有需要读的</p>
+<p>如果文件只有一行01234567891234，则全部读取在第一个分区，发生了<strong>数据倾斜</strong>；因此Spark读文件按业务分行很重要</p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><ul>
+<li><p>RDD一类方法可以将数据向下流转（红色），称之为转换，即<strong>Transformation转换算子</strong></p>
+</li>
+<li><p>另一类方法可以控制流动（蓝色，打开管道开关，接收输入），称之为行动，即<strong>Action行动算子</strong></p>
+<img src="./Spark/images/image-20250220115544984.png" alt="image-20250220115544984" style="zoom: 50%;" />
+</li>
+<li><p>Spark的转换操作是<strong>惰性的，不会立即执行</strong>。实际计算发生在触发行动操作（Action）时</p>
+</li>
+<li><p>默认情况下，新创建的RDD的分区数量和之前旧的RDD的数量保持一致，且数据流转所在的分区编号不会变</p>
+</li>
+<li><p><strong>分区内有序，分区间无序</strong>，不能保证1和3哪个先走，但能保证1比2先，3比4先</p>
+<p><img src="/./Spark/images/image-20250305200127567.png" alt="image-20250305200127567"></p>
+</li>
+<li><p>如果有两个串行的RDD，会将一个数据所有的RDD执行完后再执行下一个数据，而不是所有数据执行完一个RDD后再执行下一个RDD，因为RDD不保存数据</p>
+<p><img src="/./Spark/images/image-20250306000733388.png" alt="image-20250306000733388"></p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">        <span class="keyword">final</span> <span class="type">SparkConf</span> <span class="variable">conf</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SparkConf</span>();</span><br><span class="line">        conf.setAppName(<span class="string">&quot;s&quot;</span>);</span><br><span class="line">        conf.setMaster(<span class="string">&quot;local[2]&quot;</span>);</span><br><span class="line">        <span class="keyword">final</span> <span class="type">JavaSparkContext</span> <span class="variable">jsc</span>  <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">JavaSparkContext</span>(conf);</span><br><span class="line">        JavaRDD&lt;Integer&gt; rdd = jsc</span><br><span class="line">                .parallelize(Arrays.asList(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>), <span class="number">2</span>)</span><br><span class="line">                .map(num -&gt; &#123;</span><br><span class="line">                    System.out.println(<span class="string">&quot;@ &quot;</span> + num);</span><br><span class="line">                    <span class="keyword">return</span> num;</span><br><span class="line">                &#125;)</span><br><span class="line">                .map(num -&gt; &#123;</span><br><span class="line">                    System.out.println(<span class="string">&quot;## &quot;</span> + num);</span><br><span class="line">                    <span class="keyword">return</span> num;</span><br><span class="line">                &#125;);</span><br><span class="line">        rdd.collect();</span><br><span class="line"></span><br><span class="line"><span class="comment">//  有两个分区分别是1 2和3 4，执行时每个分区的第一个数据会把所有RDD执行完后再开始执行第二个数据</span></span><br><span class="line"><span class="comment">//  即 @ 1 -&gt; ## 1 -&gt; @ 2 -&gt; ## 2</span></span><br><span class="line"><span class="comment">//     @ 3 -&gt; ## 3 -&gt; @ 4 -&gt; ## 4</span></span><br><span class="line"><span class="comment">//  但是分区之间会有夹杂顺序，比如 @ 3 -&gt; @ 1 -&gt; ## 1 -&gt; ## 3</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>数据分类：</p>
+<ul>
+<li>单值类型</li>
+<li>键值类型 ，JAVA中有Tuple2，Tuple最大长度22</li>
+</ul>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Tuple2&lt;Integer, Character&gt; t2 = <span class="keyword">new</span> <span class="title class_">Tuple2</span>&lt;&gt;(<span class="number">1</span>,<span class="string">&#x27;a&#x27;</span>);</span><br><span class="line">System.out.println(t2._1);   <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="转换算子"><a href="#转换算子" class="headerlink" title="转换算子"></a>转换算子</h3><h4 id="map"><a href="#map" class="headerlink" title="map"></a>map</h4><p>对单值数据进行处理，将集合中的值通过自定义的方法为其他的值；map()入参是一个实现了Function接口并重写了call()方法的对象</p>
+<p>没有限制输入和输出的关系、类型（当然输出不能为call()的输出不能为Iterator对象，不然flatMap就失去意义了）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> JavaRDD&lt;Integer&gt; rdd = jsc.parallelize(</span><br><span class="line">        Arrays.asList(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>), <span class="number">2</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">//    对象式：</span></span><br><span class="line"><span class="keyword">final</span> JavaRDD&lt;Object&gt; newRDD = rdd.map(<span class="keyword">new</span> <span class="title class_">Function</span>&lt;Integer, Object&gt;() &#123;</span><br><span class="line">    <span class="comment">// Function&lt;T1, R&gt; 第一个泛型是输入类型，必须和上一个rdd的泛型统一；第二个泛型是输出类型，必须和newRDD的泛型统一</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">call</span><span class="params">(Integer in)</span> <span class="keyword">throws</span> Exception&#123;</span><br><span class="line">            <span class="keyword">return</span> in * <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//    这里map接收的参数是匿名类的匿名对象的组合，new Function&lt;&gt;()是匿名类，跳过普通类的显示定义，直接重写实现Function接口，</span></span><br><span class="line"><span class="comment">//    创建的对象也没有赋值给任何变量，而是直接作为参数传给map()方法</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//    如果JAVA中注解采用@FunctionalInterface声明，那么接口的使用就可以采用JDK提供的函数式编程语法实现(lambda)</span></span><br><span class="line"><span class="comment">//    函数式：</span></span><br><span class="line"><span class="comment">//    final JavaRDD&lt;Object&gt; newRDD = rdd.map(in -&gt; in*2);</span></span><br><span class="line"><span class="comment">//    final JavaRDD&lt;Integer&gt; newRDD = rdd.map(NumTest::mul2);</span></span><br><span class="line">newRDD.collect().forEach(System.out::println);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">----------------</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">NumTest</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">mul2</span><span class="params">(<span class="type">int</span> n)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> n*<span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>底层细节：</p>
+<ul>
+<li><strong>RDD链</strong>：<code>map</code>操作会生成一个<code>MapPartitionsRDD</code>，它是原始RDD的子RDD，保留了父RDD的分区信息；默认情况下，新RDD的分区数量与旧RDD的分区数量保持一致，分区编号也不变。</li>
+<li><strong>任务执行</strong>：每个Task读取父RDD的一个分区，逐条调用<code>call()</code>方法处理数据，输出到新分区；</li>
+<li><strong>序列化</strong>：<code>Function</code>对象会被序列化并发送到各个Executor，反序列化后执行。</li>
+</ul>
+<h4 id="filter"><a href="#filter" class="headerlink" title="filter"></a>filter</h4><p>过滤符合条件的数据，filter()入参是一个实现了Function接口并重写了call()方法且call()方法返回Boolean的对象</p>
+<p>根据一定的过滤规则对数据源中的数据进行过滤筛选；如果满足规则，数据保留；如果不满足，数据丢弃</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> JavaRDD&lt;Integer&gt; rdd = jsc.parallelize(Arrays.asList(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>), <span class="number">2</span>);</span><br><span class="line"><span class="keyword">final</span> JavaRDD&lt;Integer&gt; filterRDD = rdd.filter(<span class="keyword">new</span> <span class="title class_">Function</span>&lt;Integer, Boolean&gt;() &#123;</span><br><span class="line">      <span class="meta">@Override</span></span><br><span class="line">      <span class="keyword">public</span> Boolean <span class="title function_">call</span><span class="params">(Integer v1)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">          <span class="keyword">return</span> v1 % <span class="number">2</span> == <span class="number">1</span>;</span><br><span class="line">      &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//   final JavaRDD&lt;Integer&gt; filterRDD = rdd.filter(v1 -&gt; v1%2 == 1);</span></span><br><span class="line">filterRDD.collect().forEach(System.out::println);</span><br></pre></td></tr></table></figure>
+
+<p>filter可能会引发数据倾斜，过滤出的不同分区数据量差别很大，导致两个核处理的数据量相差很大，执行时间有大差异</p>
+<h4 id="flatMap"><a href="#flatMap" class="headerlink" title="flatMap"></a>flatMap</h4><p>扁平映射：将整体数据拆分为个体数据来使用或操作，称为扁平化；对数据操作，和map类似，称为映射</p>
+<p>flatMap()入参是一个实现FlatMapFunction接口并重写call()函数的对象，出参JavaRDD对象的泛型是call()函数输出的Iterator的泛型（不同于map，泛型直接是call()函数输出的类型），比如call()函数输出<code>Iterator&lt;Integer&gt; </code>，则承接的是 <code>JavaRDD&lt;Integer&gt;</code></p>
+<p>call()函数入参是需要操作的列表，出参是一个迭代器Iterator对象；<code>iterator()</code>函数会将列表转化成迭代对象，比如从 <code>List&lt;Integer&gt;</code>到<code>Iterator&lt;Integer&gt;</code></p>
+<p><strong>注意：</strong>从内存中读取数据创建rdd对象时<code>parallelize()</code>方法本身就展平了一维列表，内存中的一维列表不能调用<code>flatMap()</code>方法</p>
+<p>假设你有多个包裹（<code>JavaRDD&lt;List&lt;Integer&gt;&gt;</code>），每个包裹里装了一些球（<code>Integer</code>）。<code>flatMap</code>的作用是打开每个包裹，将球逐个取出，最终得到所有球的集合（<code>JavaRDD&lt;Integer&gt;</code>）。包裹中的球通过迭代器逐个取出，这就是<code>Iterator&lt;Integer&gt;</code>的作用。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">        List&lt;List&lt;List&lt;Integer&gt;&gt;&gt; myList = Arrays.asList(</span><br><span class="line">                Arrays.asList(</span><br><span class="line">                        Arrays.asList(<span class="number">1</span>, <span class="number">2</span>),</span><br><span class="line">                        Arrays.asList(<span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line">                ),</span><br><span class="line">                Arrays.asList(</span><br><span class="line">                        Arrays.asList(<span class="number">1</span>, <span class="number">2</span>),</span><br><span class="line">                        Arrays.asList(<span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line">                )</span><br><span class="line">        );</span><br><span class="line">        JavaRDD &lt;List&lt;List&lt;Integer&gt;&gt;&gt; rdd = jsc.parallelize(myList);</span><br><span class="line">        JavaRDD&lt;Integer&gt; flatMapRdd = rdd.flatMap(<span class="keyword">new</span> <span class="title class_">FlatMapFunction</span>&lt;List&lt;List&lt;Integer&gt;&gt;, Integer&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> Iterator&lt;Integer&gt; <span class="title function_">call</span><span class="params">(List&lt;List&lt;Integer&gt;&gt; lists)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">                List&lt;Integer&gt; nums = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">                lists.forEach(list -&gt;</span><br><span class="line">                        list.forEach(num -&gt;</span><br><span class="line">                                nums.add(num*<span class="number">2</span>)));</span><br><span class="line">                <span class="keyword">return</span> nums.iterator();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        flatMapRdd.collect().forEach(System.out::println);</span><br><span class="line"></span><br><span class="line">out：<span class="number">24682468</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="groupBy"><a href="#groupBy" class="headerlink" title="groupBy"></a>groupBy</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> <span class="type">JavaSparkContext</span> <span class="variable">jsc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">JavaSparkContext</span>(<span class="string">&quot;local&quot;</span>, <span class="string">&quot;app&quot;</span>);</span><br><span class="line">List&lt;Integer&gt; integerList = Arrays.asList(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line">JavaRDD&lt;Integer&gt; rdd = jsc.parallelize(integerList, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">rdd.groupBy(<span class="keyword">new</span> <span class="title class_">Function</span>&lt;Integer, Object&gt;() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">call</span><span class="params">(Integer v1)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="comment">// 返回的值：数据对应的组的名称，相同名称的数据放置在一个组中</span></span><br><span class="line">        <span class="keyword">return</span> v1 % <span class="number">2</span> == <span class="number">1</span> ? <span class="string">&quot;奇数&quot;</span> : <span class="string">&quot;偶数&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,<span class="number">2</span>)  <span class="comment">// 第二个参数numPartitions；不输入就默认原来的分区数；这里最后就会输出两个分区，奇数和偶数</span></span><br><span class="line">      <span class="comment">// 如果打开监控窗口localhost:4040会发现总共3个任务，1个任务在写（Shuffle落盘），2个任务在读</span></span><br><span class="line">        .saveAsTextFile(<span class="string">&quot;output1&quot;</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;--------------&quot;</span>);</span><br><span class="line">Thread.sleep(<span class="number">100000000L</span>);</span><br><span class="line">jsc.close();</span><br></pre></td></tr></table></figure>
+
+<p><img src="/./Spark/images/image-20250306204508766.png" alt="image-20250306204508766"></p>
+<p>默认情况下，数据处理后所在的分区不发生变化，但groupBy是例外；Spark在数据处理中要求<strong>同一groupBy组的数据必须在同一个分区中</strong>（但一个分区可以有多个groupBy组），不然后续对分组结果进行诸如求和之类的计算就很低效</p>
+<p>因此groupBy()会把<strong>数据分区打乱重新组合</strong>，即Shuffle，如果分区内的数据没有被拆开，只是多个分区合并到一个分区，则不是Shuffle</p>
+<p>关于宽依赖和窄依赖：<a target="_blank" rel="noopener" href="https://blog.csdn.net/Colton_Null/article/details/112299969">https://blog.csdn.net/Colton_Null/article/details/112299969</a></p>
+<p>Spark要求<strong>所有数据分组后才能进行后续操作</strong>，不然会破坏DAG有向无环图结构（执行了后面的map还回来执行groupBy），不像map、filter、flatMap，一个分区可以一条链到底所以不用停顿；而RDD又没有保存数据的能力，因此Shuffle操作一定会<strong>落盘</strong>。试想对1TB的数据操作，map等算子可以一行一行读取文件，每一行数据量都有限，内存够用；groupBy要把所有数据都暂存，内存会爆炸。</p>
+<p><img src="/./Spark/images/image-20250306205012675.png" alt="image-20250306205012675"></p>
+<p>Shuffle操作有可能导致资源浪费，比如三个分区准备了三个executor，但是groupBy只分了两个分区时就会有一个分区没有数据</p>
+<h4 id="distinct"><a href="#distinct" class="headerlink" title="distinct"></a>distinct</h4><p>HashSet是单点去重，在当前的内存中存放数据，如果有重复就不往里面加，每条数据都要判重</p>
+<p>rdd中的distinct是<strong>分布式去重</strong>，分组+Shuffle</p>
+<p>问题：不同的分区并行计算，分区内去重了，分区间呢？解决：打乱数据重新组合，将相同的值分到一个分区，再进行去重</p>
+<p>distinct()同样可以接收一个参数numPartitions</p>
+<h4 id="sortBy"><a href="#sortBy" class="headerlink" title="sortBy"></a>sortBy</h4><p>三个参数：排序规则，排序方式（true ascending，false descending），分区数量</p>
+<p>sortBy也会有Shuffle，分区保存的结果是总体排序后的部分结果，而不仅仅是对分区排序，sortBy的目标是生成一个<strong>全局有序</strong>的RDD。</p>
+<p>排序规则：函数的输出是为每一个数据增加的一个标记，按照标记排序，相同的标记会在一个分区</p>
+<h4 id="parallelizePairs-x2F-mapToPair"><a href="#parallelizePairs-x2F-mapToPair" class="headerlink" title="parallelizePairs&#x2F;mapToPair"></a>parallelizePairs&#x2F;mapToPair</h4><p><code>parallelizePairs()</code>读取<code>List&lt;Tuple2&lt;K, V&gt;&gt;</code>时，返回<code>JavaPairRDD&lt;K, V&gt;</code></p>
+<p><code>mapToPair()</code>实现<code>PairFunction</code>接口，通过重写<code>call()</code>函数输出<code>Tuple2&lt;K, V&gt;</code>，将<code>JavaRDD&lt;&gt;</code>转换成<code>JavaPairRDD&lt;K, V&gt;</code></p>
+<p>任务：对rdd中的每一个Tuple2二元组的值乘以2并返回</p>
+<p>以下处理方式依然是单值处理，Tuple2被看作为一个整体t -&gt; …</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> Tuple2&lt;String, Integer&gt; tp1 = <span class="keyword">new</span> <span class="title class_">Tuple2</span>&lt;&gt;(<span class="string">&quot;a&quot;</span>, <span class="number">1</span>);</span><br><span class="line"><span class="keyword">final</span> Tuple2&lt;String, Integer&gt; tp2 = <span class="keyword">new</span> <span class="title class_">Tuple2</span>&lt;&gt;(<span class="string">&quot;b&quot;</span>, <span class="number">2</span>);</span><br><span class="line"><span class="keyword">final</span> Tuple2&lt;String, Integer&gt; tp3 = <span class="keyword">new</span> <span class="title class_">Tuple2</span>&lt;&gt;(<span class="string">&quot;c&quot;</span>, <span class="number">3</span>);</span><br><span class="line"></span><br><span class="line">JavaRDD&lt;Tuple2&lt;String, Integer&gt;&gt; rdd = jsc.parallelize(Arrays.asList(tp1, tp2, tp3), <span class="number">3</span>);</span><br><span class="line">rdd.map(t -&gt; <span class="keyword">new</span> <span class="title class_">Tuple2</span>(t._1, t._2*<span class="number">2</span>))</span><br><span class="line">                .collect()</span><br><span class="line">                        .forEach(System.out::println);</span><br></pre></td></tr></table></figure>
+
+<p>如果要对KV类型数据操作：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">JavaPairRDD&lt;String, Integer&gt; pairRDD = jsc.parallelizePairs(Arrays.asList(tp1, tp2, tp3), <span class="number">3</span>);</span><br><span class="line">pairRDD.mapValues(v -&gt; v*<span class="number">2</span>)  <span class="comment">// 只对V操作，K不做处理</span></span><br><span class="line">        .collect()</span><br><span class="line">                .forEach(System.out::println);</span><br></pre></td></tr></table></figure>
+
+<p><code>map()</code>与<code>mapToPair()</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">        rdd.map(x -&gt; <span class="keyword">new</span> <span class="title class_">Tuple2</span>&lt;&gt;(x,x*<span class="number">2</span>))  <span class="comment">// JavaRDD&lt;Tuple2&lt;Integer, Integer&gt;&gt;</span></span><br><span class="line">                .map(t -&gt; <span class="keyword">new</span> <span class="title class_">Tuple2</span>&lt;&gt;(t._1, t._2*<span class="number">2</span>))  </span><br><span class="line">                .collect()  <span class="comment">// List&lt;Tuple2&lt;Integer, Integer&gt;&gt;</span></span><br><span class="line">                .forEach(System.out::println);</span><br><span class="line"></span><br><span class="line">        rdd.mapToPair(x -&gt; <span class="keyword">new</span> <span class="title class_">Tuple2</span>&lt;&gt;(x,x*<span class="number">2</span>))  <span class="comment">// JavaPairRDD&lt;Integer, Integer&gt;</span></span><br><span class="line">                .mapValues(v -&gt; v*<span class="number">2</span>)</span><br><span class="line">                .collect()  <span class="comment">// List&lt;Tuple2&lt;Integer, Integer&gt;&gt;</span></span><br><span class="line">                .forEach(System.out::println);</span><br><span class="line"></span><br><span class="line"><span class="comment">//  .collect()后生成的对象一样，都是List&lt;Tuple2&lt;Integer, Integer&gt;&gt;</span></span><br><span class="line"><span class="comment">//  但是这两个转换因子生成的RDD对象是不一样的，map()生成JavaRDD&lt;Tuple2&lt;Integer, Integer&gt;&gt;</span></span><br><span class="line"><span class="comment">//  .mapToPair()生成JavaPairRDD&lt;Integer, Integer&gt;</span></span><br><span class="line"><span class="comment">//  这就意味着只有.mapValues()生成的RDD对象能调用.mapValues()方法单独对值操作</span></span><br></pre></td></tr></table></figure>
+
+<p><code>groupBy()</code>的结果也是JavaPairRDD，比如对一个JavaRDD<Integer>执行<code>groupBy()</code>后，生成的对象是JavaPairRDD&lt;?, Iterable<Integer>&gt;</p>
+<h4 id="groupByKey"><a href="#groupByKey" class="headerlink" title="groupByKey"></a>groupByKey</h4><p>只能对<code>JavaPairRDD</code>调用，按照K对V进行分组</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Tuple2&lt;String, Integer&gt;&gt; list = Arrays.asList(</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Tuple2</span>&lt;&gt;(<span class="string">&quot;a&quot;</span>, <span class="number">1</span>),</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Tuple2</span>&lt;&gt;(<span class="string">&quot;a&quot;</span>, <span class="number">2</span>),</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Tuple2</span>&lt;&gt;(<span class="string">&quot;b&quot;</span>, <span class="number">2</span>),</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Tuple2</span>&lt;&gt;(<span class="string">&quot;b&quot;</span>, <span class="number">3</span>)</span><br><span class="line">);</span><br><span class="line">jsc.parallelizePairs(list)  <span class="comment">// JavaPairRDD&lt;String, Integer&gt;</span></span><br><span class="line">                .groupByKey()  <span class="comment">// JavaPairRDD&lt;String, Iterable&lt;Integer&gt;&gt;</span></span><br><span class="line">                .collect()  <span class="comment">// List&lt;Tuple2&lt;String, Iterable&lt;Integer&gt;&gt;&gt;</span></span><br><span class="line">                        .forEach(System.out::println);</span><br><span class="line"><span class="comment">// (a,[1, 2])</span></span><br><span class="line"><span class="comment">// (b,[2, 3])</span></span><br><span class="line"></span><br><span class="line">jsc.parallelize(list)  <span class="comment">// JavaRDD&lt;Tuple2&lt;String, Integer&gt;&gt;</span></span><br><span class="line">                .groupBy(t -&gt; t._1)  <span class="comment">// JavaPairRDD&lt;String, Iterable&lt;Tuple2&lt;String, Integer&gt;&gt;&gt;</span></span><br><span class="line">                .collect()  <span class="comment">// List&lt;Tuple2&lt;String, Iterable&lt;Tuple2&lt;String, Integer&gt;&gt;&gt;&gt;</span></span><br><span class="line">                        .forEach(System.out::println);</span><br><span class="line"><span class="comment">// (a,[(a,1), (a,2)])</span></span><br><span class="line"><span class="comment">// (b,[(b,2), (b,3)])</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="reduceByKey"><a href="#reduceByKey" class="headerlink" title="reduceByKey"></a>reduceByKey</h4><p>将KV类型的数据按照K对V进行reduce<strong>两两聚合</strong>操作，因此操作需要满足结合律（比如加法和乘法就可以，减法就不稳定）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">jsc.parallelizePairs(list)  <span class="comment">// JavaPairRDD&lt;String, Integer&gt;</span></span><br><span class="line">                .reduceByKey(Integer::sum)  <span class="comment">// JavaPairRDD&lt;String, Integer&gt;</span></span><br><span class="line">                .collect()  <span class="comment">// List&lt;Tuple2&lt;String, Integer&gt;&gt;</span></span><br><span class="line">                .forEach(System.out::println);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 完整版</span></span><br><span class="line">jsc.parallelizePairs(list)</span><br><span class="line">                .reduceByKey(<span class="keyword">new</span> <span class="title class_">Function2</span>&lt;Integer, Integer, Integer&gt;() &#123;</span><br><span class="line">                    <span class="meta">@Override</span></span><br><span class="line">                    <span class="keyword">public</span> Integer <span class="title function_">call</span><span class="params">(Integer v1, Integer v2)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">                        <span class="keyword">return</span> v1 + v2;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;)</span><br><span class="line">                .collect()</span><br><span class="line">                .forEach(System.out::println);</span><br></pre></td></tr></table></figure>
+
+<p>reduceByKey相当于整合了groupByKey和mapValues，减少了一个中间对象；但整个计算过程中真正影响计算性能的是Shuffle</p>
+<p><img src="/./Spark/images/image-20250309092803883.png" alt="image-20250309092803883"></p>
+<p>如何优化Shuffle</p>
+<ul>
+<li>用更好的硬件资源</li>
+<li>增加磁盘读写缓冲区（100条数据每10条写一次要交互10次，每50条写一次只用交互2次）</li>
+<li>不影响最终结果的前提下，落盘的数据量越少性能越高（reduceByKey预聚合），所以分组聚合优先reduceByKey</li>
+</ul>
+<p><img src="/./Spark/images/image-20250309093717859.png" alt="image-20250309093717859"></p>
+<h4 id="sortByKey"><a href="#sortByKey" class="headerlink" title="sortByKey"></a>sortByKey</h4><p>按照K进行排序，参数和sortBy类似；要求key是可比的（实现了**<code>Comparable</code><strong>和</strong><code>Serializable</code>**接口）</p>
+<h3 id="行动算子"><a href="#行动算子" class="headerlink" title="行动算子"></a>行动算子</h3><p>RDD的行动算子会触发**作业(Job)**的执行；但并不是触发作业的就是行动算子，比如<code>sortBy()</code>也会触发作业，但它是转换算子</p>
+<p>Spark在编写代码时，调用转换算子并不会真正执行，因为只是在Driver端组合功能，相当于接了新的水管但没有打开阀门</p>
+<p>只要<strong>触发了Shuffle就有作业</strong>，就会执行之前的转换算子（相当于打开了阀门）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Integer&gt; integerList = Arrays.asList(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">0</span>);</span><br><span class="line">JavaRDD&lt;Integer&gt; rdd = jsc.parallelize(integerList);</span><br><span class="line">JavaRDD&lt;Integer&gt; rdd1 = rdd.map(x -&gt;</span><br><span class="line">&#123;</span><br><span class="line">    System.out.println(x);</span><br><span class="line">    <span class="keyword">return</span> x * <span class="number">2</span>;</span><br><span class="line">&#125;);</span><br><span class="line">rdd1.map(x -&gt; x);  <span class="comment">//  没有输出</span></span><br><span class="line">System.out.println(<span class="string">&quot;-----&quot;</span>);</span><br><span class="line">rdd1.sortBy(x -&gt; x, <span class="literal">true</span>, <span class="number">2</span>);  <span class="comment">//  有输出，但如果numPartition == 1，就没有触发Shuffle，不会有输出</span></span><br></pre></td></tr></table></figure>
+
+<p>区分转换算子和行动算子：转换算子会返回新的RDD对象，行动算子返回其他的值</p>
+<h4 id="collect"><a href="#collect" class="headerlink" title="collect"></a>collect</h4><p>Spark分布式计算中，功能组合（数据和逻辑封装成Task）在Driver端完成，功能执行在Executor端完成</p>
+<p>collect()就是将Executor端执行的结果<strong>按照分区的顺序拉取（采集）回到Driver端</strong>，将结果组合成集合对象</p>
+<p>如果是从大文件中读取而非内存中读取，则分区只记录文件的<strong>切片信息（偏移量）</strong>，到Executor端才会读取文件</p>
+<p>collect()方法可能导致多个Executor的大量数据拉取到Driver端，导致内存溢出，所以生产环境慎用</p>
+<p><img src="/./Spark/images/image-20250309143358786.png" alt="image-20250309143358786"></p>
+<h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><p><strong>count()</strong> 获取结果数量</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">long</span> <span class="variable">count</span> <span class="operator">=</span> rdd1.count();</span><br></pre></td></tr></table></figure>
+
+<p><strong>countByKey()</strong> 将结果按照Key计算数量，返回<code>Map&lt;K, Long&gt;</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">        List&lt;Integer&gt; integerList = Arrays.asList(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">        JavaRDD&lt;Integer&gt; rdd = jsc.parallelize(integerList,<span class="number">3</span>);</span><br><span class="line">        JavaPairRDD&lt;Integer, Integer&gt; rdd2 = rdd.mapToPair(x -&gt; <span class="keyword">new</span> <span class="title class_">Tuple2</span>&lt;&gt;(x, x * <span class="number">2</span>));</span><br><span class="line">        Map&lt;Integer, Long&gt; integerLongMap = rdd2.countByKey();</span><br><span class="line">        System.out.println(integerLongMap);</span><br><span class="line"><span class="comment">//  &#123;0=2, 5=1, 1=2, 2=1, 3=1, 4=1&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>**first() **获取当前结果的第一个</p>
+<p><strong>take(num)</strong> 从当前结果中获取前num个</p>
+<p><strong>saveAsTextFile(path)</strong> 将数据集的数据以textFile的形式保存，对于每个元素，Spark将会调用toString方法，将它装换为文件中的文本</p>
+<p><strong>saveAsObjectFile(path)</strong> 序列化成对象保存到文件</p>
+<p><strong>foreach()</strong> 迭代调用方法，没有返回值，它和collect()之后再对List使用forEach()的区别是<strong>分区顺序</strong></p>
+<img src="./Spark/images/image-20250309155810415.png" alt="image-20250309155810415" style="zoom:50%;" />
+
+<ul>
+<li><p>foreach()<strong>分布式循环</strong>，不会按照分区顺序循环，<strong>直接在Executor端循环</strong>，打印在Executor端，分区内有序，<strong>分区间乱序</strong></p>
+</li>
+<li><p>collect().forEach()单点循环，会按照分区顺序（先拉分区1，再拉分区2……）拉回到Driver端</p>
+</li>
+</ul>
+<p><strong>foreachPartition()</strong> 重写函数输入可迭代对象，比如<code>JavaRDD&lt;Integer&gt;</code>调用<code>foreachPartition()</code>后输入就是<code>Iterator&lt;Integer&gt;</code></p>
+<ul>
+<li><code>foreach()</code>执行效率低（多次调用同一个函数），但是占的内存小</li>
+<li><code>foreachPartition()</code>执行效率高，但是可能导致Driver端内存爆炸</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">JavaRDD&lt;Integer&gt; rdd1 = jsc.parallelize(Arrays.asList(<span class="number">2</span>, <span class="number">4</span>, <span class="number">1</span>, <span class="number">3</span>), <span class="number">2</span>);</span><br><span class="line">rdd1.foreach(x -&gt; &#123;  <span class="comment">// x是Integer，代表分区内的数据</span></span><br><span class="line">    System.out.println(x);</span><br><span class="line">&#125;);  <span class="comment">// 2 1 3 4，不同分区【各自执行】，只能保证2比4先打印，1比3先打印</span></span><br><span class="line"><span class="comment">// 不能写成rdd1.foreach(System.out::println)，因为System不是可序列化对象，这么写相当于</span></span><br><span class="line"><span class="comment">// PrintStream out = System.out;</span></span><br><span class="line"><span class="comment">// rdd1.foreach(out::println);</span></span><br><span class="line">rdd1.foreachPartition(x -&gt; &#123;  <span class="comment">// x是Iterator&lt;Integer&gt;，代表一个分区</span></span><br><span class="line">    <span class="keyword">while</span> (x.hasNext()) &#123;</span><br><span class="line">        System.out.println(x.next());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);  <span class="comment">// 2 4 1 3，各个分区按整体执行，所以2,4两个输出一定紧邻，1,3两个输出同理</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h3><p>回顾：数据（偏移量）和逻辑的封装在Driver端完成，功能的执行在Executor端完成</p>
+<p>有些对象需要在二者间通信，但是网络中不能传对象只能传字节码，就需要先把对象变成字节码，<strong>将对象变成字节码</strong>的过程就叫序列化，将字节码变成对象的过程就叫反序列化；传输的对象需要实现序列化接口</p>
+<p>RDD算子的逻辑代码是在Executor端执行的（除了<code>collect()</code>外几乎所有的常见算子），因此逻辑代码中包含的对象需要是可序列化的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SerializableTest</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">SparkConf</span> <span class="variable">conf</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SparkConf</span>();</span><br><span class="line">        conf.setAppName(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">        conf.setMaster(<span class="string">&quot;local[*]&quot;</span>);</span><br><span class="line">        <span class="type">JavaSparkContext</span> <span class="variable">jsc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">JavaSparkContext</span>(conf);</span><br><span class="line">        JavaRDD&lt;String&gt; rdd = jsc.textFile(<span class="string">&quot;data/test2.txt&quot;</span>);</span><br><span class="line">        JavaRDD&lt;String&gt; rdd1 = rdd.map(x -&gt; x.split(<span class="string">&quot; &quot;</span>))</span><br><span class="line">                .flatMap(x -&gt; Arrays.asList(x).iterator());</span><br><span class="line">        <span class="type">Search</span> <span class="variable">s</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Search</span>(<span class="string">&quot;H&quot;</span>);</span><br><span class="line">        s.match(rdd1);</span><br><span class="line">        jsc.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Search类两种写法</span></span><br><span class="line"><span class="comment">// 一、</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Search</span> <span class="keyword">implements</span> <span class="title class_">Serializable</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String query;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Search</span><span class="params">(String query)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.query = query;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">match</span><span class="params">(JavaRDD&lt;String&gt; rdd)</span>&#123;</span><br><span class="line">        rdd.filter(s -&gt; s.startsWith(<span class="built_in">this</span>.query))  <span class="comment">// 对象可序列化，可以从Driver端传到Executor端</span></span><br><span class="line">                .collect()</span><br><span class="line">                .forEach(System.out::println);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 二、</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Search</span> <span class="keyword">implements</span> <span class="title class_">Serializable</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String query;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Search</span><span class="params">(String query)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.query = query;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">match</span><span class="params">(JavaRDD&lt;String&gt; rdd)</span>&#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">q</span> <span class="operator">=</span> <span class="built_in">this</span>.query;</span><br><span class="line">        rdd.filter(s -&gt; s.startsWith(q))  <span class="comment">// 字符串可序列化，可以从Driver端传到Executor端</span></span><br><span class="line">                .collect()</span><br><span class="line">                .forEach(System.out::println);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">JavaRDD&lt;Integer&gt; rdd1 = jsc.parallelize(Arrays.asList(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>),<span class="number">2</span>);</span><br><span class="line">rdd1.foreach(x -&gt;&#123;</span><br><span class="line">    System.out.println(x); <span class="comment">// System.out对象是在Executor端创建的</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// rdd1.foreach(System.out::println); // 会报错，因为其本质是：</span></span><br><span class="line"><span class="comment">// PrintStream out = System.out;</span></span><br><span class="line"><span class="comment">// rdd1.foreach(out::println); // 这里的out对象是在Driver端创建的，然而无法序列化传到Executor端</span></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">rdd1.mapToPair(x -&gt; <span class="keyword">new</span> <span class="title class_">Tuple2</span>&lt;&gt;(x%<span class="number">2</span>, x))</span><br><span class="line">                .reduceByKey(Integer::sum)  <span class="comment">// 这里就不会报错，因为sum是Integer类的静态方法</span></span><br><span class="line">                                            <span class="comment">// 其逻辑不依赖任何对象实例</span></span><br><span class="line">                        .foreach(x -&gt; &#123;</span><br><span class="line">                            System.out.println(x);</span><br><span class="line">                        &#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="依赖关系"><a href="#依赖关系" class="headerlink" title="依赖关系"></a>依赖关系</h3><ul>
+<li>窄依赖：每一个父RDD的Partition最多被子RDD的一个Partition使用（一对一or多对一），窄依赖我们形象的比喻为独生子女</li>
+</ul>
+<p><img src="/./Spark/images/image-20250310221141038.png" alt="image-20250310221141038"></p>
+<ul>
+<li>宽依赖：同一个父RDD的Partition被多个子RDD的Partition依赖（只能是一对多），会引起Shuffle，总结：宽依赖我们形象的比喻为超生</li>
+</ul>
+<p><img src="/./Spark/images/image-20250310221208887.png" alt="image-20250310221208887"></p>
+<p>具有宽依赖的<em>transformations</em>包括：<em>sort</em>、<em>reduceByKey</em>、<em>groupByKey</em>、<em>join</em>和调用<em>rePartition</em>函数的任何操作。</p>
+<p>宽依赖对Spark去评估一个transformations有更加重要的影响，比如对性能的影响。</p>
+<p>在不影响业务要求的情况下，要尽量避免使用有宽依赖的转换算子，因为<strong>有宽依赖，就一定会走shuffle，影响性能</strong>。</p>
+<h1 id="SparkCore实战"><a href="#SparkCore实战" class="headerlink" title="SparkCore实战"></a>SparkCore实战</h1><p>开发原则</p>
+<ul>
+<li>多什么，删什么，减小数据规模</li>
+<li>缺什么，补什么</li>
+<li>尽可能少使用Shuffle操作</li>
+</ul>
+<h1 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h1><p>如果两个目录都被添加到环境变量，且两个目录下都有start-all.sh，那么在执行start-all.sh时系统会怎么处理</p>
+<p>——执行顺序在前的（先遍历到的）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Transform_Distinct_SortBy</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">final</span> <span class="type">JavaSparkContext</span> <span class="variable">jsc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">JavaSparkContext</span>(<span class="string">&quot;local&quot;</span>, <span class="string">&quot;a&quot;</span>);</span><br><span class="line">        List&lt;Integer&gt; integerList = Arrays.asList(<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>);</span><br><span class="line">        JavaRDD&lt;Integer&gt; rdd = jsc.parallelize(integerList, <span class="number">1</span>);</span><br><span class="line">        rdd</span><br><span class="line">                .sortBy(x -&gt; x, <span class="literal">true</span>, <span class="number">5</span>)</span><br><span class="line">                .saveAsTextFile(<span class="string">&quot;output&quot;</span>);</span><br><span class="line">        jsc.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 为什么输出三个分区？第一个分区6个1，第二个分区2个2，第三个分区空白</span></span><br></pre></td></tr></table></figure>
+
+
         
       </div>
       
@@ -393,7 +868,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spark"><span class="nav-number">1.</span> <span class="nav-text">Spark</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%B6%E6%9E%84%E5%8F%8A%E7%94%9F%E6%80%81"><span class="nav-number">1.2.</span> <span class="nav-text">架构及生态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spark-vs-MapReduce"><span class="nav-number">1.3.</span> <span class="nav-text">Spark vs MapReduce</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2"><span class="nav-number">2.</span> <span class="nav-text">部署</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5-1"><span class="nav-number">2.1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="nav-number">2.2.</span> <span class="nav-text">文件结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E6%A8%A1%E5%BC%8F"><span class="nav-number">2.3.</span> <span class="nav-text">本地模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Yarn%E6%A8%A1%E5%BC%8F"><span class="nav-number">2.4.</span> <span class="nav-text">Yarn模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E8%BF%90%E8%A1%8C%E6%A8%A1%E5%BC%8F"><span class="nav-number">2.5.</span> <span class="nav-text">其他运行模式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RDD"><span class="nav-number">3.</span> <span class="nav-text">RDD</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80"><span class="nav-number">3.1.</span> <span class="nav-text">基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA"><span class="nav-number">3.2.</span> <span class="nav-text">创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E5%8C%BA"><span class="nav-number">3.3.</span> <span class="nav-text">分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%95"><span class="nav-number">3.4.</span> <span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%AC%E6%8D%A2%E7%AE%97%E5%AD%90"><span class="nav-number">3.4.1.</span> <span class="nav-text">转换算子</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#map"><span class="nav-number">3.4.1.1.</span> <span class="nav-text">map</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#filter"><span class="nav-number">3.4.1.2.</span> <span class="nav-text">filter</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#flatMap"><span class="nav-number">3.4.1.3.</span> <span class="nav-text">flatMap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#groupBy"><span class="nav-number">3.4.1.4.</span> <span class="nav-text">groupBy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#distinct"><span class="nav-number">3.4.1.5.</span> <span class="nav-text">distinct</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sortBy"><span class="nav-number">3.4.1.6.</span> <span class="nav-text">sortBy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#parallelizePairs-x2F-mapToPair"><span class="nav-number">3.4.1.7.</span> <span class="nav-text">parallelizePairs&#x2F;mapToPair</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#groupByKey"><span class="nav-number">3.4.1.8.</span> <span class="nav-text">groupByKey</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#reduceByKey"><span class="nav-number">3.4.1.9.</span> <span class="nav-text">reduceByKey</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sortByKey"><span class="nav-number">3.4.1.10.</span> <span class="nav-text">sortByKey</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%8C%E5%8A%A8%E7%AE%97%E5%AD%90"><span class="nav-number">3.4.2.</span> <span class="nav-text">行动算子</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#collect"><span class="nav-number">3.4.2.1.</span> <span class="nav-text">collect</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">3.4.2.2.</span> <span class="nav-text">其他</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%8F%E5%88%97%E5%8C%96"><span class="nav-number">3.4.3.</span> <span class="nav-text">序列化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%9D%E8%B5%96%E5%85%B3%E7%B3%BB"><span class="nav-number">3.4.4.</span> <span class="nav-text">依赖关系</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SparkCore%E5%AE%9E%E6%88%98"><span class="nav-number">4.</span> <span class="nav-text">SparkCore实战</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Question"><span class="nav-number">5.</span> <span class="nav-text">Question</span></a></li></ol></div>
             
 
           </div>
@@ -600,6 +1075,26 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 

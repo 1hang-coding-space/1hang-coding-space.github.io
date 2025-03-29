@@ -113,8 +113,8 @@
 <meta property="og:image" content="http://example.com/Spark/images/image-20250309155810415.png">
 <meta property="og:image" content="http://example.com/Spark/images/image-20250310221141038.png">
 <meta property="og:image" content="http://example.com/Spark/images/image-20250310221208887.png">
-<meta property="article:published_time" content="2025-03-28T15:33:34.265Z">
-<meta property="article:modified_time" content="2025-03-28T15:33:34.265Z">
+<meta property="article:published_time" content="2025-03-29T01:08:42.491Z">
+<meta property="article:modified_time" content="2025-03-29T01:08:42.491Z">
 <meta property="article:author" content="林轶航">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/Spark/images/image-20250201232536550.png">
@@ -728,7 +728,7 @@
 </ul>
 <p><img src="/./Spark/images/image-20250310221141038.png" alt="image-20250310221141038"></p>
 <ul>
-<li>宽依赖：同一个父RDD的Partition被多个子RDD的Partition依赖（只能是一对多），会引起Shuffle，总结：宽依赖我们形象的比喻为超生</li>
+<li>宽依赖：同一个父RDD的Partition被多个子RDD的Partition依赖（只能是一对多），会引起Shuffle，总结：宽依赖我们形象的比喻为非独生</li>
 </ul>
 <p><img src="/./Spark/images/image-20250310221208887.png" alt="image-20250310221208887"></p>
 <p>具有宽依赖的<em>transformations</em>包括：<em>sort</em>、<em>reduceByKey</em>、<em>groupByKey</em>、<em>join</em>和调用<em>rePartition</em>函数的任何操作。</p>
@@ -740,9 +740,7 @@
 <li>缺什么，补什么</li>
 <li>尽可能少使用Shuffle操作</li>
 </ul>
-<h1 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h1><p>如果两个目录都被添加到环境变量，且两个目录下都有start-all.sh，那么在执行start-all.sh时系统会怎么处理</p>
-<p>——执行顺序在前的（先遍历到的）</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Transform_Distinct_SortBy</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">final</span> <span class="type">JavaSparkContext</span> <span class="variable">jsc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">JavaSparkContext</span>(<span class="string">&quot;local&quot;</span>, <span class="string">&quot;a&quot;</span>);</span><br><span class="line">        List&lt;Integer&gt; integerList = Arrays.asList(<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>);</span><br><span class="line">        JavaRDD&lt;Integer&gt; rdd = jsc.parallelize(integerList, <span class="number">1</span>);</span><br><span class="line">        rdd</span><br><span class="line">                .sortBy(x -&gt; x, <span class="literal">true</span>, <span class="number">5</span>)</span><br><span class="line">                .saveAsTextFile(<span class="string">&quot;output&quot;</span>);</span><br><span class="line">        jsc.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 为什么输出三个分区？第一个分区6个1，第二个分区2个2，第三个分区空白</span></span><br></pre></td></tr></table></figure>
+<h1 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Transform_Distinct_SortBy</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">final</span> <span class="type">JavaSparkContext</span> <span class="variable">jsc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">JavaSparkContext</span>(<span class="string">&quot;local&quot;</span>, <span class="string">&quot;a&quot;</span>);</span><br><span class="line">        List&lt;Integer&gt; integerList = Arrays.asList(<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>);</span><br><span class="line">        JavaRDD&lt;Integer&gt; rdd = jsc.parallelize(integerList, <span class="number">1</span>);</span><br><span class="line">        rdd</span><br><span class="line">                .sortBy(x -&gt; x, <span class="literal">true</span>, <span class="number">5</span>)</span><br><span class="line">                .saveAsTextFile(<span class="string">&quot;output&quot;</span>);</span><br><span class="line">        jsc.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 为什么输出三个分区？第一个分区6个1，第二个分区2个2，第三个分区空白</span></span><br></pre></td></tr></table></figure>
 
 
         

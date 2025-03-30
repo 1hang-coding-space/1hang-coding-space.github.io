@@ -79,12 +79,12 @@
 
 
 
-<meta name="description" content="OverviewBasicSpark：基于Hadoop MapReduce的分布式计算引擎（框架），同时优化了内部流程，提高了效率；应用场景囊括了大部分离线数据分析和少部分实时数据分析   单机：单进程，单节点；一个JAVA虚拟机的进程在一个电脑运行，在生产环境中资源（尤其是内存）不够，因为JVM启动后会申请一定的内存，进程中的线程可以抢占CPU的核，但内存被配置了 伪分布式：多进程，单节点（df">
+<meta name="description" content="OverviewBasicSpark：基于Hadoop MapReduce的分布式计算引擎（框架），同时优化了内部流程，提高了效率；应用场景囊括了大部分离线数据分析和少部分实时数据分析   单机：单进程，单节点；一个JAVA虚拟机的进程在一个电脑运行，在生产环境中资源（尤其是内存）不够，因为JVM启动后会申请一定的内存，进程中的线程可以抢占CPU的核，但内存被固定配置了 伪分布式：多进程，单节点（">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Spark">
 <meta property="og:url" content="http://example.com/Spark/index.html">
 <meta property="og:site_name" content="Coding Blog">
-<meta property="og:description" content="OverviewBasicSpark：基于Hadoop MapReduce的分布式计算引擎（框架），同时优化了内部流程，提高了效率；应用场景囊括了大部分离线数据分析和少部分实时数据分析   单机：单进程，单节点；一个JAVA虚拟机的进程在一个电脑运行，在生产环境中资源（尤其是内存）不够，因为JVM启动后会申请一定的内存，进程中的线程可以抢占CPU的核，但内存被配置了 伪分布式：多进程，单节点（df">
+<meta property="og:description" content="OverviewBasicSpark：基于Hadoop MapReduce的分布式计算引擎（框架），同时优化了内部流程，提高了效率；应用场景囊括了大部分离线数据分析和少部分实时数据分析   单机：单进程，单节点；一个JAVA虚拟机的进程在一个电脑运行，在生产环境中资源（尤其是内存）不够，因为JVM启动后会申请一定的内存，进程中的线程可以抢占CPU的核，但内存被固定配置了 伪分布式：多进程，单节点（">
 <meta property="og:locale">
 <meta property="og:image" content="http://example.com/Spark/images/image-20250201232536550.png">
 <meta property="og:image" content="http://example.com/Spark/images/image-20250202152246897.png">
@@ -113,8 +113,8 @@
 <meta property="og:image" content="http://example.com/Spark/images/image-20250309155810415.png">
 <meta property="og:image" content="http://example.com/Spark/images/image-20250310221141038.png">
 <meta property="og:image" content="http://example.com/Spark/images/image-20250310221208887.png">
-<meta property="article:published_time" content="2025-03-30T23:30:05.477Z">
-<meta property="article:modified_time" content="2025-03-30T23:30:05.477Z">
+<meta property="article:published_time" content="2025-03-30T23:44:45.938Z">
+<meta property="article:modified_time" content="2025-03-30T23:44:45.938Z">
 <meta property="article:author" content="林轶航">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/Spark/images/image-20250201232536550.png">
@@ -318,7 +318,7 @@
           <h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><h2 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h2><p>Spark：基于Hadoop MapReduce的分布式计算引擎（框架），同时优化了内部流程，提高了效率；应用场景囊括了大部分离线数据分析和少部分实时数据分析</p>
 <p><img src="/./Spark/images/image-20250201232536550.png" alt="image-20250201232536550"></p>
 <ul>
-<li>单机：单进程，单节点；一个JAVA虚拟机的进程在一个电脑运行，在生产环境中资源（尤其是内存）不够，因为JVM启动后会申请一定的内存，进程中的线程可以抢占CPU的核，但内存被配置了</li>
+<li>单机：单进程，单节点；一个JAVA虚拟机的进程在一个电脑运行，在生产环境中资源（尤其是内存）不够，因为JVM启动后会申请一定的内存，进程中的线程可以抢占CPU的核，但内存被固定配置了</li>
 <li>伪分布式：多进程，单节点（dfs.replication设为1）；在一个节点上启动多个进程（NameNode、SecondaryNameNode、DataNode、ResourceManager、NodeManager）能获取更多的内存资源；另外，多个进程抢占CPU的能力更强，因为虽然线程是CPU调度的最小单位，但抢占CPU是由进程完成的（进程是资源分配的基本单位）</li>
 <li>分布式：多进程，多节点</li>
 </ul>

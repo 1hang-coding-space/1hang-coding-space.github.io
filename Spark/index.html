@@ -113,8 +113,8 @@
 <meta property="og:image" content="http://example.com/Spark/images/image-20250309155810415.png">
 <meta property="og:image" content="http://example.com/Spark/images/image-20250310221141038.png">
 <meta property="og:image" content="http://example.com/Spark/images/image-20250310221208887.png">
-<meta property="article:published_time" content="2025-03-30T23:44:45.938Z">
-<meta property="article:modified_time" content="2025-03-30T23:44:45.938Z">
+<meta property="article:published_time" content="2025-04-03T02:51:38.852Z">
+<meta property="article:modified_time" content="2025-04-03T02:51:38.852Z">
 <meta property="article:author" content="林轶航">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/Spark/images/image-20250201232536550.png">
@@ -379,7 +379,7 @@
 <li>data：包括一些模块的数据，比如streaming、MLlib的数据</li>
 <li>example：官方案例，主要包含案例的jar包和src源码</li>
 <li>jars：存放Spark运行依赖的jar包</li>
-<li>sbin：存放系统管理的必备程序，也可理解为s开头的命令（比如start-all.sh、stop-all.sh）</li>
+<li>sbin：存放系统管理的必备程序，需要superuser(root)权限执行，比如start-all.sh、stop-all.sh</li>
 </ul>
 <h2 id="Local"><a href="#Local" class="headerlink" title="Local"></a>Local</h2><p>官方案例计算圆周率：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bin/spark-submit \</span><br><span class="line">--class org.apache.spark.examples.SparkPi \</span><br><span class="line">--master local[2] \</span><br><span class="line">./examples/jars/spark-examples_2.12-3.3.1.jar \</span><br><span class="line">10</span><br></pre></td></tr></table></figure>

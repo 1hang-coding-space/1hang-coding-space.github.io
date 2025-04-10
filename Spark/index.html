@@ -113,8 +113,8 @@
 <meta property="og:image" content="http://example.com/Spark/images/image-20250309155810415.png">
 <meta property="og:image" content="http://example.com/Spark/images/image-20250310221141038.png">
 <meta property="og:image" content="http://example.com/Spark/images/image-20250310221208887.png">
-<meta property="article:published_time" content="2025-04-09T14:48:04.045Z">
-<meta property="article:modified_time" content="2025-04-09T14:48:04.045Z">
+<meta property="article:published_time" content="2025-04-10T03:06:58.490Z">
+<meta property="article:modified_time" content="2025-04-10T03:06:58.490Z">
 <meta property="article:author" content="林轶航">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/Spark/images/image-20250201232536550.png">
@@ -733,12 +733,13 @@
 <p>宽依赖对Spark去评估一个transformations有更加重要的影响，比如对性能的影响。<br>在不影响业务要求的情况下，要尽量避免使用有宽依赖的转换算子，因为<strong>有宽依赖，就一定会走shuffle，影响性能</strong>。</p>
 <p><strong>作业</strong>(Job)：由行动算子触发的完整计算流程</p>
 <p><strong>阶段</strong>(Stage)：Job的物理执行单元；如果计算流程中存在Shuffle，那就会新增一个阶段<br>阶段的数量 &#x3D; 1 + 宽依赖的数量</p>
-<p><strong>任务</strong>(Task)：阶段的最小执行单元，每个Task对应一个分区的计算任务<br>任务的数量是每个阶段（最后一个）分区数量之和</p>
+<p><strong>任务</strong>(Task)：阶段的最小执行单元，每个Task对应一个分区的计算任务<br>任务的数量是每个阶段（最后一个）分区数量之和<br>任务的数量应该设定为多少？可以简单理解为资源的核数</p>
 <p>开发原则</p>
 <ul>
 <li>多什么，删什么，减小数据规模</li>
 <li>缺什么，补什么</li>
 <li>尽可能少使用Shuffle操作</li>
+<li>避免大批量数据的跨节点转移</li>
 </ul>
 <h1 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Transform_Distinct_SortBy</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">final</span> <span class="type">JavaSparkContext</span> <span class="variable">jsc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">JavaSparkContext</span>(<span class="string">&quot;local&quot;</span>, <span class="string">&quot;a&quot;</span>);</span><br><span class="line">        List&lt;Integer&gt; integerList = Arrays.asList(<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>);</span><br><span class="line">        JavaRDD&lt;Integer&gt; rdd = jsc.parallelize(integerList, <span class="number">1</span>);</span><br><span class="line">        rdd</span><br><span class="line">                .sortBy(x -&gt; x, <span class="literal">true</span>, <span class="number">5</span>)</span><br><span class="line">                .saveAsTextFile(<span class="string">&quot;output&quot;</span>);</span><br><span class="line">        jsc.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 为什么输出三个分区？第一个分区6个1，第二个分区2个2，第三个分区空白</span></span><br></pre></td></tr></table></figure>
 
